@@ -1,759 +1,404 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Perigon Partners - LinkedIn Post Generator SOP</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
     :root {
-      --navy: #0f1f3d;
-      --navy-mid: #1a3260;
-      --gold: #c9a84c;
-      --gold-light: #e8c97a;
-      --cream: #faf8f4;
-      --white: #ffffff;
-      --grey-100: #f5f4f1;
-      --grey-200: #e8e6e1;
-      --grey-400: #9b9690;
-      --grey-600: #5c5850;
-      --grey-800: #2d2b27;
-      --info-bg: #eef3fb;
-      --info-border: #93b4e0;
-      --warn-bg: #fef8ed;
-      --warn-border: #e8c97a;
-      --tip-bg: #edf7f2;
-      --tip-border: #7ec9a0;
-      --radius: 6px;
-      --shadow: 0 1px 4px rgba(15,31,61,0.08), 0 4px 16px rgba(15,31,61,0.06);
+      --green:#2cac6c;--green-light:#2cac6c;--green-pale:#eef8f3;
+      --dark:#1d3657;--body:#1d3657;--muted:#6b7a8d;
+      --border:#e8eaed;--bg:#f7f8f9;
+      --warn-bg:#FFF7ED;--warn-border:#FB923C;--warn-text:#9A3412;
+      --info-bg:#EFF6FF;--info-border:#3B82F6;--info-text:#1E40AF;
     }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--cream);
-      color: var(--grey-800);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-
-    .doc-header {
-      background: var(--navy);
-      color: var(--white);
-      padding: 48px 0 0;
-    }
-    .doc-header .inner {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-    .sop-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
-    }
-    .doc-header h1 {
-      font-size: 32px;
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-    .doc-header .subtitle {
-      font-size: 15px;
-      color: rgba(255,255,255,0.6);
-      margin-bottom: 32px;
-    }
-    .meta-strip {
-      display: flex;
-      gap: 32px;
-      padding: 20px 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      flex-wrap: wrap;
-    }
-    .meta-item { display: flex; flex-direction: column; gap: 2px; }
-    .meta-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
-    .meta-value { font-size: 13px; color: rgba(255,255,255,0.85); }
-
-    .contents-bar {
-      background: var(--navy-mid);
-      border-bottom: 2px solid var(--gold);
-    }
-    .contents-bar .inner {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 40px;
-    }
-    .contents-bar ol {
-      list-style: none;
-      display: flex;
-      gap: 0;
-      flex-wrap: wrap;
-    }
-    .contents-bar ol li a {
-      display: block;
-      padding: 14px 18px;
-      font-size: 12px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: color 0.15s, background 0.15s;
-      border-right: 1px solid rgba(255,255,255,0.08);
-    }
-    .contents-bar ol li a:hover { color: var(--gold-light); background: rgba(255,255,255,0.05); }
-
-    .doc-body {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 48px 40px 80px;
-    }
-
-    .section { margin-bottom: 60px; }
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    h2 {
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--grey-200);
-    }
-    h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--navy);
-      margin: 28px 0 12px;
-    }
-    h3.step-heading {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    h3.step-heading::before {
-      content: attr(data-step);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      background: var(--navy);
-      color: var(--gold);
-      border-radius: 50%;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    p { margin-bottom: 12px; }
-    strong { font-weight: 600; }
-    em { font-style: italic; }
-    a { color: var(--navy-mid); }
-
-    ol.steps, ul.bullets {
-      margin: 12px 0 16px 0;
-      padding-left: 24px;
-    }
-    ol.steps li, ul.bullets li { margin-bottom: 8px; }
-
-    .flow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      background: var(--white);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      margin: 20px 0;
-      box-shadow: var(--shadow);
-    }
-    .flow-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      text-align: center;
-    }
-    .flow-num {
-      width: 32px;
-      height: 32px;
-      background: var(--navy);
-      color: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .flow-desc {
-      font-size: 12px;
-      color: var(--grey-600);
-      max-width: 120px;
-      line-height: 1.4;
-    }
-    .flow-app {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: 0.04em;
-    }
-    .flow-arrow { font-size: 18px; color: var(--grey-400); padding: 0 4px; }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin: 16px 0;
-    }
-    .tl-row {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-    .tl-time {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--gold);
-      font-family: 'JetBrains Mono', monospace;
-      min-width: 64px;
-      padding-top: 2px;
-    }
-    .tl-line {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .tl-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--navy);
-      border: 2px solid var(--gold);
-      margin-top: 4px;
-      flex-shrink: 0;
-    }
-    .tl-track {
-      width: 2px;
-      flex: 1;
-      background: var(--grey-200);
-      min-height: 24px;
-    }
-    .tl-last .tl-track { display: none; }
-    .tl-content {
-      font-size: 14px;
-      color: var(--grey-800);
-      padding-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .callout {
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      margin: 16px 0;
-      font-size: 14px;
-      line-height: 1.6;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .callout.tip { background: var(--tip-bg); border-left: 3px solid var(--tip-border); }
-    .callout.warn { background: var(--warn-bg); border-left: 3px solid var(--warn-border); }
-    .callout.info { background: var(--info-bg); border-left: 3px solid var(--info-border); }
-
-    .table-wrap { overflow-x: auto; margin: 20px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
-    table { width: 100%; border-collapse: collapse; background: var(--white); font-size: 14px; }
-    thead { background: var(--navy); color: var(--white); }
-    thead th { padding: 12px 16px; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.04em; }
-    tbody tr:nth-child(even) { background: var(--grey-100); }
-    tbody td { padding: 11px 16px; border-bottom: 1px solid var(--grey-200); color: var(--grey-800); vertical-align: top; }
-    tbody tr:last-child td { border-bottom: none; }
-
-    /* Post type cards */
-    .post-card {
-      background: var(--white);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius);
-      margin-bottom: 20px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    .post-card-header {
-      background: var(--navy);
-      color: var(--white);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .post-type-badge {
-      background: var(--gold);
-      color: var(--navy);
-      border-radius: 4px;
-      padding: 2px 8px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      flex-shrink: 0;
-    }
-    .post-card-title { font-weight: 600; font-size: 15px; }
-    .post-card-body { padding: 18px 20px; font-size: 14px; }
-    .post-field { margin-bottom: 10px; }
-    .post-field-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-400); margin-bottom: 4px; }
-
-    .trouble-card {
-      background: var(--white);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius);
-      margin-bottom: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-    .trouble-header {
-      background: var(--grey-100);
-      border-bottom: 1px solid var(--grey-200);
-      padding: 12px 18px;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--navy);
-    }
-    .trouble-body { padding: 14px 18px; font-size: 14px; }
-    .trouble-cause { margin-bottom: 10px; }
-    .trouble-cause-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-400); margin-bottom: 4px; }
-    .trouble-steps-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--grey-400); margin-bottom: 6px; }
-
-    .zap-step {
-      background: var(--white);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius);
-      margin-bottom: 16px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    .zap-step-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      border-bottom: 1px solid var(--grey-200);
-      background: var(--grey-100);
-    }
-    .zap-num {
-      width: 28px;
-      height: 28px;
-      background: var(--navy);
-      color: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-    .zap-title { font-weight: 600; font-size: 14px; color: var(--navy); }
-    .zap-subtitle { font-size: 12px; color: var(--grey-400); margin-top: 1px; }
-    .zap-body { padding: 14px 18px; font-size: 14px; }
-    .zap-fields { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
-    .zap-field { display: flex; gap: 12px; font-size: 13px; }
-    .zap-field-key { min-width: 180px; color: var(--grey-400); font-weight: 500; flex-shrink: 0; }
-    .zap-field-val { color: var(--grey-800); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-
-    .prompt-block {
-      background: var(--grey-100);
-      border: 1px solid var(--grey-200);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      line-height: 1.7;
-      color: var(--grey-800);
-      white-space: pre-wrap;
-      margin-top: 10px;
-    }
-    .prompt-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--grey-400);
-      margin-bottom: 6px;
-    }
-
-    /* AI layers table */
-    .ai-table-wrap { overflow-x: auto; margin: 20px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
-
-    .doc-footer {
-      background: var(--navy);
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      padding: 24px 40px;
-      font-size: 12px;
-    }
-    .doc-footer strong { color: var(--gold); }
-
-    @media (max-width: 640px) {
-      .doc-body { padding: 32px 20px 60px; }
-      .doc-header .inner { padding: 0 20px; }
-      .contents-bar .inner { padding: 0 20px; }
-      .contents-bar ol { flex-direction: column; }
-      .meta-strip { gap: 16px; }
-      .flow { flex-direction: column; align-items: flex-start; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Montserrat',sans-serif;color:var(--body);line-height:1.7;background:#fff;}
+    .cover{background:var(--green);color:white;padding:56px 64px 48px;overflow:hidden;position:relative;}
+    .cover::after{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06);}
+    .cover-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:12px;}
+    .cover h1{font-size:32px;font-weight:700;line-height:1.25;margin-bottom:8px;}
+    .cover-sub{font-size:16px;opacity:.8;margin-bottom:32px;}
+    .cover-meta{display:flex;gap:32px;font-size:13px;opacity:.7;flex-wrap:wrap;}
+    .cover-meta strong{display:block;font-weight:600;opacity:1;margin-bottom:2px;}
+    .content{max-width:860px;margin:0 auto;padding:48px 64px 80px;}
+    .toc{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin-bottom:48px;}
+    .toc h2{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+    .toc ol{padding-left:20px;} .toc li{margin-bottom:6px;font-size:14px;}
+    .toc a{color:var(--green);text-decoration:none;font-weight:500;}
+    .toc a:hover{text-decoration:underline;}
+    .toc .sub{padding-left:20px;margin-top:4px;list-style-type:lower-alpha;} .toc .sub li{margin-bottom:3px;}
+    .section{margin-bottom:56px;}
+    .section-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green-light);margin-bottom:6px;}
+    h2.section-title{font-size:24px;font-weight:700;color:var(--dark);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--green-pale);}
+    h3{font-size:16px;font-weight:600;color:var(--dark);margin:28px 0 10px;}
+    p{margin-bottom:14px;font-size:15px;} ul,ol{padding-left:22px;margin-bottom:14px;font-size:15px;} li{margin-bottom:6px;}
+    .steps{counter-reset:step;list-style:none;padding:0;}
+    .steps li{counter-increment:step;position:relative;padding:18px 20px 18px 64px;background:var(--bg);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;font-size:15px;}
+    .steps li::before{content:counter(step);position:absolute;left:18px;top:50%;transform:translateY(-50%);width:32px;height:32px;background:var(--green);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;}
+    .steps li strong{display:block;font-weight:600;margin-bottom:3px;}
+    .steps li .note{display:block;margin-top:6px;font-size:13px;color:var(--muted);font-style:italic;}
+    .callout{border-radius:8px;padding:16px 20px;margin:20px 0;font-size:14px;display:flex;gap:12px;}
+    .callout-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+    .callout.warning{background:var(--warn-bg);border-left:4px solid var(--warn-border);}
+    .callout.warning p{color:var(--warn-text);margin:0;}
+    .callout.info{background:var(--info-bg);border-left:4px solid var(--info-border);}
+    .callout.info p{color:var(--info-text);margin:0;}
+    .callout.tip{background:var(--green-pale);border-left:4px solid var(--green);}
+    .callout.tip p{color:#1B4332;margin:0;}
+    .flow{display:flex;align-items:stretch;flex-wrap:wrap;margin:24px 0 32px;}
+    .flow-step{flex:1;min-width:130px;background:var(--green-pale);border:1px solid var(--green-light);border-radius:8px;padding:16px 14px;text-align:center;}
+    .flow-num{display:inline-block;background:var(--green);color:white;border-radius:50%;width:22px;height:22px;font-size:11px;font-weight:700;line-height:22px;margin-bottom:8px;}
+    .flow-label{font-size:12px;font-weight:600;color:#1B4332;line-height:1.4;}
+    .flow-tool{font-size:11px;color:var(--green);margin-top:4px;font-weight:500;}
+    .flow-arrow{display:flex;align-items:center;padding:0 5px;color:var(--green-light);font-size:20px;flex-shrink:0;}
+    .trouble-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;}
+    .trouble-problem{background:var(--dark);color:white;padding:14px 20px;font-size:14px;font-weight:600;}
+    .trouble-body{padding:16px 20px;}
+    .trouble-body p{font-size:14px;margin-bottom:8px;} .trouble-body ul{font-size:14px;margin-bottom:0;}
+    .trouble-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px;}
+    .timeline{position:relative;padding-left:32px;margin:20px 0;}
+    .timeline::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--green-pale);}
+    .timeline-item{position:relative;margin-bottom:20px;}
+    .timeline-item::before{content:'';position:absolute;left:-28px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--green);}
+    .timeline-item .time{font-size:12px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.5px;}
+    .timeline-item p{font-size:14px;margin:2px 0 0;}
+    .zap-step{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px;}
+    .zap-header{display:flex;align-items:center;gap:16px;background:var(--dark);color:white;padding:16px 20px;}
+    .zap-num{width:34px;height:34px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+    .zap-title{font-size:15px;font-weight:600;line-height:1.3;}
+    .zap-app{font-size:12px;opacity:.6;margin-top:2px;}
+    .zap-body{padding:20px;}
+    .zap-body p{font-size:14px;margin-bottom:12px;}
+    .zap-config{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:12px 0;}
+    .zap-row{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--border);font-size:13px;}
+    .zap-row:last-child{border-bottom:none;}
+    .zap-row span:first-child{color:var(--muted);font-weight:500;flex:0 0 44%;}
+    .zap-row span:last-child{font-weight:600;color:var(--dark);flex:0 0 54%;}
+    .zap-prompt{background:#F0FDF4;border:1px solid var(--green-light);border-radius:8px;padding:14px 16px;font-size:13px;color:#1B4332;line-height:1.7;margin-top:12px;white-space:pre-wrap;word-wrap:break-word;}
+    .zap-prompt-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+    .post-type{border-radius:8px;padding:16px 20px;margin:12px 0;border:1px solid var(--border);}
+    .post-type-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+    .post-type-badge{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:20px;color:white;white-space:nowrap;}
+    .post-type-badge.tl{background:var(--green);}
+    .post-type-badge.tb{background:#E67E22;}
+    .post-type-badge.cta{background:#2980B9;}
+    .post-type-title{font-size:14px;font-weight:600;color:var(--dark);}
+    .post-type p{font-size:14px;color:var(--body);margin:0 0 6px;}
+    table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px;}
+    th{background:var(--green);color:white;padding:12px 16px;text-align:left;}
+    th:first-child{border-radius:8px 0 0 0;} th:last-child{border-radius:0 8px 0 0;}
+    td{padding:10px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+    code{background:var(--green-pale);color:#1a5c3a;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px;}
+    footer{text-align:center;padding:32px 64px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
+    @media(max-width:700px){
+      .content{padding:24px 20px 48px;} .cover{padding:36px 24px 32px;}
+      .cover-meta{flex-direction:column;gap:12px;}
+      .flow{flex-direction:column;} .flow-arrow{transform:rotate(90deg);justify-content:center;}
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="doc-header">
-  <div class="inner">
-    <div class="sop-label">Standard Operating Procedure</div>
-    <h1>LinkedIn Post Generator</h1>
-    <p class="subtitle">How the Perigon Partners LinkedIn content automation works</p>
-    <div class="meta-strip">
-      <div class="meta-item"><span class="meta-label">Organisation</span><span class="meta-value">Perigon Partners</span></div>
-      <div class="meta-item"><span class="meta-label">Version</span><span class="meta-value">1.2</span></div>
-      <div class="meta-item"><span class="meta-label">Last updated</span><span class="meta-value">February 2026</span></div>
-      <div class="meta-item"><span class="meta-label">System owner</span><span class="meta-value">Sally Weatherly, Growth &amp; Operations Lead</span></div>
-    </div>
+<div class="cover">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
+    <img src="https://89ab1b9d0953ed8139b3281780b6c5e3.cdn.bubble.io/cdn-cgi/image/w=192,h=77,f=auto,dpr=1.5,fit=contain/f1754302917373x877021894104060800/Perigon%20Logo%20Large%20Cropped.png" alt="Perigon Partners" style="height:40px;width:auto;"/>
+    <a href="index.html" style="font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;">&#8592; All SOPs</a>
   </div>
-</header>
+  <div class="cover-label">Standard Operating Procedure</div>
+  <h1>LinkedIn Post<br>Generator</h1>
+  <div class="cover-sub">How the Perigon Partners LinkedIn content automation works</div>
+  <div class="cover-meta">
+    <div><strong>Organisation</strong>Perigon Partners</div>
+    <div><strong>Version</strong>1.2</div>
+    <div><strong>Last updated</strong>February 2026</div>
+    <div><strong>System owner</strong>Sally Weatherly, Growth &amp; Operations Lead</div>
+  </div>
+</div>
 
-<!-- CONTENTS NAV -->
-<nav class="contents-bar">
-  <div class="inner">
+<div class="content">
+
+  <div class="toc">
+    <h2>Contents</h2>
     <ol>
-      <li><a href="#overview">01 · Overview</a></li>
-      <li><a href="#howto">02 · Step-by-step guide</a></li>
-      <li><a href="#posttypes">03 · The three post types</a></li>
-      <li><a href="#troubleshoot">04 · Troubleshooting</a></li>
-      <li><a href="#quickref">05 · Quick reference</a></li>
-      <li><a href="#zapier">06 · Zapier technical reference</a></li>
+      <li><a href="#overview">Overview &amp; How it works</a></li>
+      <li><a href="#howto">Step-by-step guide</a>
+        <ol class="sub">
+          <li><a href="#step-record">Record the Teams meeting</a></li>
+          <li><a href="#step-upload">Upload the transcript</a></li>
+          <li><a href="#step-output">What Emma receives</a></li>
+          <li><a href="#step-review">Reviewing and posting</a></li>
+        </ol>
+      </li>
+      <li><a href="#posttypes">The three post types</a></li>
+      <li><a href="#troubleshoot">Troubleshooting</a></li>
+      <li><a href="#quickref">Quick reference checklist</a></li>
+      <li><a href="#zapier">Zapier technical reference</a></li>
     </ol>
   </div>
-</nav>
-
-<!-- BODY -->
-<main class="doc-body">
 
   <!-- SECTION 01 -->
-  <section class="section" id="overview">
+  <div class="section" id="overview">
     <div class="section-label">Section 01</div>
-    <h2>Overview &amp; How it works</h2>
+    <h2 class="section-title">Overview &amp; How it works</h2>
     <p>The Perigon LinkedIn Post Generator automatically produces three LinkedIn posts for Emma — one per post type — triggered by any recorded Teams meeting that passes through the Meeting Note Bot. <strong>There is no separate content capture step and no manual input required.</strong> The same transcript that produces meeting notes also generates LinkedIn posts, with nothing additional needed from the team.</p>
 
     <div class="flow">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <div class="flow-desc">Find new Google Doc transcript in Meeting Minutes folder</div>
-        <div class="flow-app">Google Drive</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <div class="flow-desc">Extract full text from transcript Google Doc</div>
-        <div class="flow-app">Google Docs</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <div class="flow-desc">Refocus meeting notes for LinkedIn across 5 sections</div>
-        <div class="flow-app">AI by Zapier · GPT-5.2</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <div class="flow-desc">Generate 3 LinkedIn posts in Emma's voice</div>
-        <div class="flow-app">AI by Zapier · GPT-5.2</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-step">
-        <div class="flow-num">5</div>
-        <div class="flow-desc">Send HTML email to emma@perigonpartners.co.uk</div>
-        <div class="flow-app">Outlook · agents@</div>
-      </div>
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">Find new Google Doc transcript in Meeting Minutes folder</div><div class="flow-tool">Google Drive</div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">Extract full text from transcript Google Doc</div><div class="flow-tool">Google Docs</div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Refocus meeting notes for LinkedIn across 5 sections</div><div class="flow-tool">AI by Zapier · GPT-5.2</div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Generate 3 LinkedIn posts in Emma's voice</div><div class="flow-tool">AI by Zapier · GPT-5.2</div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-label">Send HTML email to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f7929a9a96b78792859e9098998796858399928584d99498d9829c">[email&#160;protected]</a></div><div class="flow-tool">Outlook · agents@</div></div>
     </div>
 
-    <div class="callout info"><span class="callout-icon">ℹ️</span><div><strong>This runs on every recorded meeting</strong> — not just the weekly team meeting. Any transcript processed by the Meeting Note Bot will also trigger the LinkedIn Generator automatically. Client meetings, strategy sessions, and internal discussions can all produce LinkedIn content.</div></div>
+    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p><strong>This runs on every recorded meeting</strong> — not just the weekly team meeting. Any transcript processed by the Meeting Note Bot will also trigger the LinkedIn Generator automatically. Client meetings, strategy sessions, and internal discussions can all produce LinkedIn content.</p></div>
 
     <h3>The two AI layers explained</h3>
     <p>The automation uses two AI steps in sequence. Running them separately produces significantly stronger output than asking a single step to jump from raw transcript to finished LinkedIn posts in one go.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Step</th><th>What it does</th><th>Why it matters</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong>Step 3</strong><br>Refocusing meeting notes for LinkedIn</td>
-            <td>Reads the raw transcript and extracts the most strategically useful material across 5 sections: Client World, The Outside World, Team Brain, Inside Perigon, and Recurring Conversations. Selects 2–3 focused insights rather than summarising everything.</td>
-            <td>Filters noise. Sections 3 (Team Brain) and 5 (Recurring Conversations) are weighted most heavily — these contain the most distinct, human insights.</td>
-          </tr>
-          <tr>
-            <td><strong>Step 4</strong><br>Generate 3 posts for Emma</td>
-            <td>Takes the structured Step 3 output and generates three LinkedIn posts — one per post type — in Emma's voice, guided by the full knowledge base.</td>
-            <td>Works from focused, curated material. This is what produces specific, Emma-sounding posts rather than generic LinkedIn content.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table>
+      <thead><tr><th style="width:22%;">Step</th><th style="width:42%;">What it does</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--bg);">
+          <td style="font-weight:600;">Step 3<br>Refocusing meeting notes for LinkedIn</td>
+          <td>Reads the raw transcript and extracts the most strategically useful material across 5 sections: Client World, The Outside World, Team Brain, Inside Perigon, and Recurring Conversations. Selects 2–3 focused insights rather than summarising everything.</td>
+          <td>Filters noise. Sections 3 (Team Brain) and 5 (Recurring Conversations) are weighted most heavily — these contain the most distinct, human insights.</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600;">Step 4<br>Generate 3 posts for Emma</td>
+          <td>Takes the structured Step 3 output and generates three LinkedIn posts — one per post type — in Emma's voice, guided by the full knowledge base.</td>
+          <td>Works from focused, curated material. This is what produces specific, Emma-sounding posts rather than generic LinkedIn content.</td>
+        </tr>
+      </tbody>
+    </table>
 
     <h3>What Emma receives</h3>
-    <p>An HTML-formatted email sent from <strong>agents@perigonpartners.co.uk</strong> directly to <strong>emma@perigonpartners.co.uk</strong>. The email body contains three complete LinkedIn posts — one Thought Leadership, one Trust Building, one CTA — ready for Emma to review and personalise before posting.</p>
-    <div class="callout tip"><span class="callout-icon">💡</span><div><strong>These are drafts, not finished posts.</strong> Emma should review each post, add any personal context or current detail, and write in her own voice before posting to LinkedIn. The automation produces a strong, specific first draft — it does not replace Emma's voice.</div></div>
+    <p>An HTML-formatted email sent from <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26474143485255665643544f414948564754524843545508454908534d">[email&#160;protected]</a></strong> directly to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afcac2c2ceefdfcaddc6c8c0c1dfcedddbc1cadddc81ccc081dac4">[email&#160;protected]</a></strong>. The email body contains three complete LinkedIn posts — one Thought Leadership, one Trust Building, one CTA — ready for Emma to review and personalise before posting.</p>
+
+    <div class="callout tip"><div class="callout-icon">&#128161;</div><p><strong>These are drafts, not finished posts.</strong> Emma should review each post, add any personal context or current detail, and write in her own voice before posting to LinkedIn. The automation produces a strong, specific first draft — it does not replace Emma's voice.</p></div>
 
     <h3>Processing timeline</h3>
     <div class="timeline">
-      <div class="tl-row">
-        <div class="tl-time">0 min</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div>
-        <div class="tl-content">Meeting transcript .docx is uploaded to the Meeting Note Bot trigger folder (as per Meeting Note Bot SOP)</div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-time">~1–4 min</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div>
-        <div class="tl-content">Meeting Note Bot runs: transcript converted, meeting notes written, branded Google Doc created and emailed to agents@ inbox</div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-time">~4–6 min</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div>
-        <div class="tl-content">LinkedIn Generator Step 3 runs: transcript text analysed and refocused across 5 sections</div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-time">~6–9 min</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div>
-        <div class="tl-content">LinkedIn Generator Step 4 runs: three posts generated in Emma's voice</div>
-      </div>
-      <div class="tl-row tl-last">
-        <div class="tl-time">~10 min</div>
-        <div class="tl-line"><div class="tl-dot"></div><div class="tl-track"></div></div>
-        <div class="tl-content">HTML email with three posts arrives in emma@perigonpartners.co.uk inbox</div>
-      </div>
+      <div class="timeline-item"><div class="time">0 min</div><p>Meeting transcript .docx is uploaded to the Meeting Note Bot trigger folder (as per Meeting Note Bot SOP)</p></div>
+      <div class="timeline-item"><div class="time">~1–4 min</div><p>Meeting Note Bot runs: transcript converted, meeting notes written, branded Google Doc created and emailed to agents@ inbox</p></div>
+      <div class="timeline-item"><div class="time">~4–6 min</div><p>LinkedIn Generator Step 3 runs: transcript text analysed and refocused across 5 sections</p></div>
+      <div class="timeline-item"><div class="time">~6–9 min</div><p>LinkedIn Generator Step 4 runs: three posts generated in Emma's voice</p></div>
+      <div class="timeline-item"><div class="time">~10 min</div><p>HTML email with three posts arrives in <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="11747c7c705161746378767e7f617063657f7463623f727e3f647a">[email&#160;protected]</a> inbox</p></div>
     </div>
-  </section>
+  </div>
 
   <!-- SECTION 02 -->
-  <section class="section" id="howto">
+  <div class="section" id="howto">
     <div class="section-label">Section 02</div>
-    <h2>Step-by-step guide</h2>
+    <h2 class="section-title">Step-by-step guide</h2>
 
-    <h3 class="step-heading" data-step="1">Record your Teams meeting</h3>
+    <h3 id="step-record">Step 1 — Record your Teams meeting</h3>
     <p>Follow the same recording process described in the Meeting Note Bot SOP. No additional preparation is needed for the LinkedIn Generator — it runs automatically from the same transcript.</p>
-    <div class="callout tip"><span class="callout-icon">💡</span><div>Meetings where the team discusses client challenges, market observations, or where someone says something that makes the room pause tend to produce the strongest LinkedIn content. The richer the discussion, the better the posts.</div></div>
+    <div class="callout tip"><div class="callout-icon">&#128161;</div><p>Meetings where the team discusses client challenges, market observations, or where someone says something that makes the room pause tend to produce the strongest LinkedIn content. The richer the discussion, the better the posts.</p></div>
 
-    <h3 class="step-heading" data-step="2">Upload the transcript to Google Drive</h3>
-    <p>Follow the upload process described in the Meeting Note Bot SOP. Uploading the .docx transcript to the trigger folder (<em>My Drive → Meeting Notes → Upload Meeting Transcripts HERE</em>) triggers both pipelines simultaneously. No separate upload or action is needed for the LinkedIn Generator.</p>
-    <div class="callout warn"><span class="callout-icon">⚠️</span><div>The LinkedIn Generator depends on the same trigger as the Meeting Note Bot. If the Meeting Note Bot is not running, neither will the LinkedIn Generator. Check the Meeting Note Bot SOP troubleshooting section first if nothing is received.</div></div>
+    <h3 id="step-upload">Step 2 — Upload the transcript to Google Drive</h3>
+    <p>Follow the upload process described in the Meeting Note Bot SOP. Uploading the .docx transcript to the trigger folder (<em>My Drive &#8594; Meeting Notes &#8594; Upload Meeting Transcripts HERE</em>) triggers both pipelines simultaneously. No separate upload or action is needed for the LinkedIn Generator.</p>
+    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>The LinkedIn Generator depends on the same trigger as the Meeting Note Bot. If the Meeting Note Bot is not running, neither will the LinkedIn Generator. Check the Meeting Note Bot SOP troubleshooting section first if nothing is received.</p></div>
 
-    <h3 class="step-heading" data-step="3">Emma receives the posts by email</h3>
+    <h3 id="step-output">Step 3 — Emma receives the posts by email</h3>
     <ol class="steps">
-      <li><strong>Wait approximately 10 minutes.</strong> The full pipeline — transcript processing, meeting notes, LinkedIn analysis, post generation — takes around 10 minutes end to end.</li>
-      <li><strong>Check emma@perigonpartners.co.uk.</strong> The three posts are sent directly to Emma's inbox from agents@perigonpartners.co.uk. The meeting notes PDF arrives separately in the agents@ inbox as usual. If the email lands in spam, mark it as safe to prevent this on future runs.</li>
-      <li><strong>Read all three posts in full.</strong> Each is formatted in HTML and covers one post type: Thought Leadership, Trust Building, and CTA.</li>
+      <li><strong>Wait approximately 10 minutes</strong> The full pipeline — transcript processing, meeting notes, LinkedIn analysis, post generation — takes around 10 minutes end to end.</li>
+      <li><strong>Check <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ffaf2f2fedfeffaedf6f8f0f1effeedebf1faedecb1fcf0b1eaf4">[email&#160;protected]</a></strong> The three posts are sent directly to Emma's inbox from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcbdbbb9b2a8af9cacb9aeb5bbb3b2acbdaea8b2b9aeaff2bfb3f2a9b7">[email&#160;protected]</a>. The meeting notes PDF arrives separately in the agents@ inbox as usual.<span class="note">If the email lands in spam, mark it as safe to prevent this on future runs.</span></li>
+      <li><strong>Read all three posts in full</strong> Each is formatted in HTML and covers one post type: Thought Leadership, Trust Building, and CTA.</li>
     </ol>
 
-    <h3 class="step-heading" data-step="4">Emma reviews, personalises, and posts</h3>
+    <h3 id="step-review">Step 4 — Emma reviews, personalises, and posts</h3>
     <ol class="steps">
-      <li><strong>Read each post and identify which feels most natural to post this week.</strong> The AI anchors each post to a specific insight from the meeting — if one feels off, the source material from that meeting may have been thin in that area.</li>
-      <li><strong>Personalise the post.</strong> Add current context, a personal observation, or a specific detail that only Emma would include. This is what makes the post feel like Emma rather than a generator.</li>
-      <li><strong>Post or schedule to LinkedIn.</strong> Recommended cadence: three posts per week, one of each type. Monday (Thought Leadership) · Wednesday (Trust Building) · Friday (CTA).</li>
+      <li><strong>Read each post and identify which feels most natural to post this week</strong> The AI anchors each post to a specific insight from the meeting — if one feels off, the source material from that meeting may have been thin in that area.</li>
+      <li><strong>Personalise the post</strong> Add current context, a personal observation, or a specific detail that only Emma would include. This is what makes the post feel like Emma rather than a generator.</li>
+      <li><strong>Post or schedule to LinkedIn</strong> Recommended cadence: three posts per week, one of each type. Monday (Thought Leadership) · Wednesday (Trust Building) · Friday (CTA).</li>
     </ol>
-    <div class="callout info"><span class="callout-icon">ℹ️</span><div>The AI output should never be posted to LinkedIn without Emma's review and personalisation. The posts are strong first drafts — the finished post should always feel like it came from Emma.</div></div>
-  </section>
+    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p>The AI output should never be posted to LinkedIn without Emma's review and personalisation. The posts are strong first drafts — the finished post should always feel like it came from Emma.</p></div>
+  </div>
 
   <!-- SECTION 03 -->
-  <section class="section" id="posttypes">
+  <div class="section" id="posttypes">
     <div class="section-label">Section 03</div>
-    <h2>The three post types</h2>
+    <h2 class="section-title">The three post types</h2>
     <p>The automation generates exactly one post per type on every run. Together across the week they build both reach and relationship with Emma's ideal client audience.</p>
 
-    <div class="post-card">
-      <div class="post-card-header">
-        <div class="post-type-badge">Post Type 1</div>
-        <div class="post-card-title">Thought Leadership</div>
+    <div class="post-type">
+      <div class="post-type-header">
+        <span class="post-type-badge tl">Post Type 1</span>
+        <span class="post-type-title">Thought Leadership</span>
       </div>
-      <div class="post-card-body">
-        <div class="post-field"><div class="post-field-label">Goal</div>Reach and awareness. Position Emma as the most relevant expert voice for her ICP. The reader should finish thinking <em>"she understands my world."</em></div>
-        <div class="post-field"><div class="post-field-label">Tone</div>Expert, opinionated, generous with insight. Never hedged or vague.</div>
-        <div class="post-field"><div class="post-field-label">Examples</div>"I attended this event — here are my three takeaways"; "New regulation has just been introduced — here's what it means for a 200-person financial services firm"; "How to navigate [challenge] without losing strategic coherence."</div>
-        <div class="post-field"><div class="post-field-label">CTA style</div>A genuine question Emma wants answered — specific to the post topic, not a generic "what do you think?"</div>
-      </div>
+      <p><strong>Goal:</strong> Reach and awareness. Position Emma as the most relevant expert voice for her ICP. The reader should finish thinking "she understands my world."</p>
+      <p><strong>Tone:</strong> Expert, opinionated, generous with insight. Never hedged or vague.</p>
+      <p><strong>Examples:</strong> "I attended this event — here are my three takeaways"; "New regulation has just been introduced — here's what it means for a 200-person financial services firm"; "How to navigate [challenge] without losing strategic coherence."</p>
+      <p><strong>CTA style:</strong> A genuine question Emma wants answered — specific to the post topic, not a generic "what do you think?"</p>
     </div>
 
-    <div class="post-card">
-      <div class="post-card-header">
-        <div class="post-type-badge">Post Type 2</div>
-        <div class="post-card-title">Trust Building</div>
+    <div class="post-type">
+      <div class="post-type-header">
+        <span class="post-type-badge tb">Post Type 2</span>
+        <span class="post-type-title">Trust Building</span>
       </div>
-      <div class="post-card-body">
-        <div class="post-field"><div class="post-field-label">Goal</div>Deepen relationship with the existing audience. Make followers feel they know Emma and how Perigon thinks. The reader should finish thinking <em>"I feel like I know her."</em></div>
-        <div class="post-field"><div class="post-field-label">Tone</div>Personal, honest, specific. Vulnerable where appropriate. Never vague or motivational.</div>
-        <div class="post-field"><div class="post-field-label">Examples</div>A client situation (anonymised) that shows how Perigon thinks; a moment of self-doubt or growth; an internal team win described with warmth and honesty.</div>
-        <div class="post-field"><div class="post-field-label">CTA style</div>Soft — a reflective question or "I'd love to hear your experience." No commercial message in this post type.</div>
-      </div>
+      <p><strong>Goal:</strong> Deepen relationship with the existing audience. Make followers feel they know Emma and how Perigon thinks. The reader should finish thinking "I feel like I know her."</p>
+      <p><strong>Tone:</strong> Personal, honest, specific. Vulnerable where appropriate. Never vague or motivational.</p>
+      <p><strong>Examples:</strong> A client situation (anonymised) that shows how Perigon thinks; a moment of self-doubt or growth; an internal team win described with warmth and honesty.</p>
+      <p><strong>CTA style:</strong> Soft — a reflective question or "I'd love to hear your experience." No commercial message in this post type.</p>
     </div>
 
-    <div class="post-card">
-      <div class="post-card-header">
-        <div class="post-type-badge">Post Type 3</div>
-        <div class="post-card-title">CTA</div>
+    <div class="post-type">
+      <div class="post-type-header">
+        <span class="post-type-badge cta">Post Type 3</span>
+        <span class="post-type-title">CTA</span>
       </div>
-      <div class="post-card-body">
-        <div class="post-field"><div class="post-field-label">Goal</div>Move warm audience members toward a next step with Perigon — a tool, diagnostic, conversation, or service. The reader should finish thinking <em>"that's actually useful — I might take her up on that."</em></div>
-        <div class="post-field"><div class="post-field-label">Tone</div>Value-led. Never pushy. Lead with a genuine insight, end with a low-friction invitation.</div>
-        <div class="post-field"><div class="post-field-label">Examples</div>"Try our new ESG compliance tool"; "Let me know how Perigon Partners can help you in this situation"; "Behind on AI strategy? We've built a short diagnostic — happy to share it."</div>
-        <div class="post-field"><div class="post-field-label">CTA style</div>Direct but low friction. DM / tool / conversation. Never "let's chat" or "reach out to find out more."</div>
-      </div>
+      <p><strong>Goal:</strong> Move warm audience members toward a next step with Perigon — a tool, diagnostic, conversation, or service. The reader should finish thinking "that's actually useful — I might take her up on that."</p>
+      <p><strong>Tone:</strong> Value-led. Never pushy. Lead with a genuine insight, end with a low-friction invitation.</p>
+      <p><strong>Examples:</strong> "Try our new ESG compliance tool"; "Let me know how Perigon Partners can help you in this situation"; "Behind on AI strategy? We've built a short diagnostic — happy to share it."</p>
+      <p><strong>CTA style:</strong> Direct but low friction. DM / tool / conversation. Never "let's chat" or "reach out to find out more."</p>
     </div>
-  </section>
+  </div>
 
   <!-- SECTION 04 -->
-  <section class="section" id="troubleshoot">
+  <div class="section" id="troubleshoot">
     <div class="section-label">Section 04</div>
-    <h2>Troubleshooting</h2>
+    <h2 class="section-title">Troubleshooting</h2>
     <p>Check the Meeting Note Bot SOP first if the meeting notes did not arrive — the LinkedIn Generator runs on the same pipeline.</p>
 
-    <div class="trouble-card">
-      <div class="trouble-header">Emma received the meeting notes but not the LinkedIn posts</div>
+    <div class="trouble-item">
+      <div class="trouble-problem">Emma received the meeting notes but not the LinkedIn posts</div>
       <div class="trouble-body">
-        <div class="trouble-cause"><div class="trouble-cause-label">Likely cause</div>Steps 3, 4, or 5 of the LinkedIn Generator Zap errored after the Meeting Note Bot completed successfully.</div>
-        <div class="trouble-steps-label">Steps to resolve</div>
-        <ul class="bullets">
+        <div class="trouble-label">Likely cause</div>
+        <p>Steps 3, 4, or 5 of the LinkedIn Generator Zap errored after the Meeting Note Bot completed successfully.</p>
+        <div class="trouble-label">Steps to resolve</div>
+        <ul>
           <li>Wait a full 15 minutes — Step 4 (post generation) can occasionally be slow.</li>
-          <li>Check emma@perigonpartners.co.uk spam/junk folder — HTML-formatted emails occasionally trigger spam filters.</li>
+          <li>Check <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98fdf5f5f9d8e8fdeaf1fff7f6e8f9eaecf6fdeaebb6fbf7b6edf3">[email&#160;protected]</a> spam/junk folder — HTML-formatted emails occasionally trigger spam filters.</li>
           <li>Ask Sally to check the Zapier run history for errors on Steps 3, 4, or 5 of the "Emma LinkedIn Idea Generator" Zap.</li>
         </ul>
       </div>
     </div>
 
-    <div class="trouble-card">
-      <div class="trouble-header">Neither the meeting notes nor the LinkedIn posts arrived</div>
+    <div class="trouble-item">
+      <div class="trouble-problem">Neither the meeting notes nor the LinkedIn posts arrived</div>
       <div class="trouble-body">
-        <div class="trouble-cause"><div class="trouble-cause-label">Likely cause</div>The trigger did not fire — likely a file placement or file type issue at Step 1.</div>
-        <div class="trouble-steps-label">Steps to resolve</div>
-        <ul class="bullets">
+        <div class="trouble-label">Likely cause</div>
+        <p>The trigger did not fire — likely a file placement or file type issue at Step 1.</p>
+        <div class="trouble-label">Steps to resolve</div>
+        <ul>
           <li>Refer to the <strong>Meeting Note Bot SOP troubleshooting section</strong> and resolve that first. Both automations share the same trigger — if the trigger is broken, neither will run.</li>
         </ul>
       </div>
     </div>
 
-    <div class="trouble-card">
-      <div class="trouble-header">The posts arrived but don't sound like Emma — they're generic</div>
+    <div class="trouble-item">
+      <div class="trouble-problem">The posts arrived but don't sound like Emma — they're generic</div>
       <div class="trouble-body">
-        <div class="trouble-cause"><div class="trouble-cause-label">Likely cause</div>The meeting contained limited strategic or client-facing discussion, leaving Step 3 with thin material to work from. Short or operational-only meetings will always produce weaker post ideas.</div>
-        <div class="trouble-steps-label">Steps to resolve</div>
-        <ul class="bullets">
+        <div class="trouble-label">Likely cause</div>
+        <p>The meeting contained limited strategic or client-facing discussion, leaving Step 3 with thin material to work from. Short or operational-only meetings will always produce weaker post ideas.</p>
+        <div class="trouble-label">Steps to resolve</div>
+        <ul>
           <li>This is expected for certain meeting types — not every meeting will produce equally strong posts.</li>
           <li>If substantive meetings are consistently producing generic output, the knowledge base files in Zapier may be out of date. Ask Sally to review the Emma Walford Voice Guide and Top Posts reference in the Step 4 knowledge sources.</li>
         </ul>
       </div>
     </div>
 
-    <div class="trouble-card">
-      <div class="trouble-header">The posts reference incorrect details about Perigon, a client, or a service</div>
+    <div class="trouble-item">
+      <div class="trouble-problem">The posts reference incorrect details about Perigon, a client, or a service</div>
       <div class="trouble-body">
-        <div class="trouble-cause"><div class="trouble-cause-label">Likely cause</div>The Perigon Partners Knowledge Source document is out of date, or the meeting transcript contained an ambiguous reference the AI misread.</div>
-        <div class="trouble-steps-label">Steps to resolve</div>
-        <ul class="bullets">
+        <div class="trouble-label">Likely cause</div>
+        <p>The Perigon Partners Knowledge Source document is out of date, or the meeting transcript contained an ambiguous reference the AI misread.</p>
+        <div class="trouble-label">Steps to resolve</div>
+        <ul>
           <li>Check whether the incorrect detail relates to something in the Perigon Partners Knowledge Source — if so, flag to Sally to update it.</li>
           <li>Do not include sensitive or full client names in meeting discussions that are being recorded — the AI should work from anonymised descriptions only.</li>
         </ul>
       </div>
     </div>
 
-    <div class="trouble-card">
-      <div class="trouble-header">Fewer than three posts were generated</div>
+    <div class="trouble-item">
+      <div class="trouble-problem">Fewer than three posts were generated</div>
       <div class="trouble-body">
-        <div class="trouble-cause"><div class="trouble-cause-label">Likely cause</div>The AI hit an output token limit, or the transcript lacked enough varied content for all three post types.</div>
-        <div class="trouble-steps-label">Steps to resolve</div>
-        <ul class="bullets">
+        <div class="trouble-label">Likely cause</div>
+        <p>The AI hit an output token limit, or the transcript lacked enough varied content for all three post types.</p>
+        <div class="trouble-label">Steps to resolve</div>
+        <ul>
           <li>Read the email carefully — all three posts may be present but one may be significantly shorter than the others.</li>
           <li>If a post type is consistently missing, Sally should check the output token limit setting in the Step 4 Zapier configuration.</li>
         </ul>
       </div>
     </div>
 
-    <div class="callout info"><span class="callout-icon">ℹ️</span><div>For issues not covered here, contact <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead). Include the meeting name, date, and a description of what was and was not received.</div></div>
-  </section>
+    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p>For issues not covered here, contact <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead). Include the meeting name, date, and a description of what was and was not received.</p></div>
+  </div>
 
   <!-- SECTION 05 -->
-  <section class="section" id="quickref">
+  <div class="section" id="quickref">
     <div class="section-label">Section 05</div>
-    <h2>Quick reference checklist</h2>
+    <h2 class="section-title">Quick reference checklist</h2>
     <p>The LinkedIn Generator runs fully automatically — no additional steps are needed beyond the normal Meeting Note Bot process.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Step</th><th>Action</th><th>Common mistake to avoid</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Record the Teams meeting with transcription enabled</td><td>Forgetting to start recording — no transcript means no posts</td></tr>
-          <tr><td>2</td><td>Download transcript as <strong>.docx</strong> from Teams recap</td><td>Downloading as .vtt — the pipeline requires .docx</td></tr>
-          <tr><td>3</td><td>Upload to: <em>My Drive → Meeting Notes → Upload Meeting Transcripts HERE</em></td><td>This is the same step as the Meeting Note Bot — no separate upload needed for LinkedIn</td></tr>
-          <tr><td>4</td><td>Wait ~10 minutes, then check <strong>emma@perigonpartners.co.uk</strong></td><td>Checking agents@ — the LinkedIn posts go directly to Emma, not to agents@</td></tr>
-          <tr><td>5</td><td>Emma reviews all three posts and selects what to develop this week</td><td>Using only the first post — all three types should be considered each week</td></tr>
-          <tr><td>6</td><td>Emma personalises each post with her own voice before posting to LinkedIn</td><td>Posting AI output directly without personalisation — always the most important step</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <table>
+      <thead><tr><th>Step</th><th>Action</th><th>Common mistake to avoid</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">1</td><td>Record the Teams meeting with transcription enabled</td><td>Forgetting to start recording — no transcript means no posts</td></tr>
+        <tr><td style="font-weight:600;">2</td><td>Download transcript as <strong>.docx</strong> from Teams recap</td><td>Downloading as .vtt — the pipeline requires .docx</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">3</td><td>Upload to: <em>My Drive &#8594; Meeting Notes &#8594; Upload Meeting Transcripts HERE</em></td><td>This is the same step as the Meeting Note Bot — no separate upload needed for LinkedIn</td></tr>
+        <tr><td style="font-weight:600;">4</td><td>Wait ~10 minutes, then check <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99c949498b9899c8b909e969789988b8d979c8b8ad79a96d78c92">[email&#160;protected]</a></strong></td><td>Checking agents@ — the LinkedIn posts go directly to Emma, not to agents@</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">5</td><td>Emma reviews all three posts and selects what to develop this week</td><td>Using only the first post — all three types should be considered each week</td></tr>
+        <tr><td style="font-weight:600;">6</td><td>Emma personalises each post with her own voice before posting to LinkedIn</td><td>Posting AI output directly without personalisation — always the most important step</td></tr>
+      </tbody>
+    </table>
+  </div>
 
   <!-- SECTION 06 -->
-  <section class="section" id="zapier">
+  <div class="section" id="zapier">
     <div class="section-label">Section 06</div>
-    <h2>Zapier technical reference</h2>
+    <h2 class="section-title">Zapier technical reference</h2>
     <p>The LinkedIn Generator is a separate Zap named <strong>"Emma LinkedIn Idea Generator"</strong> in the Perigon workspace. It has 5 steps and runs automatically whenever a new meeting transcript Google Doc appears in the Meeting Minutes (Workhorse Folder) — triggered by output from the Meeting Note Bot pipeline.</p>
-    <div class="callout warn"><span class="callout-icon">⚠️</span><div>Only <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead) should make changes to this Zap. If you think a prompt or setting needs updating, flag it to Sally rather than editing directly.</div></div>
+
+    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>Only <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead) should make changes to this Zap. If you think a prompt or setting needs updating, flag it to Sally rather than editing directly.</p></div>
 
     <div class="zap-step">
-      <div class="zap-step-header"><div class="zap-num">1</div><div><div class="zap-title">Find new Google Docs meeting transcript file</div><div class="zap-subtitle">Trigger · Google Drive · polls every 2 minutes</div></div></div>
+      <div class="zap-header"><div class="zap-num">1</div><div><div class="zap-title">Find new google docs meeting transcript file</div><div class="zap-app">Trigger &nbsp;&#183;&nbsp; Google Drive &nbsp;&#183;&nbsp; polls every 2 minutes</div></div></div>
       <div class="zap-body">
         <p>Watches the Meeting Minutes (Workhorse Folder) for new Google Doc files. Fires when the Meeting Note Bot has converted and saved a transcript — meaning the LinkedIn Generator always works from the same converted document, not the raw .docx upload.</p>
-        <div class="zap-fields">
-          <div class="zap-field"><span class="zap-field-key">Folder monitored</span><span class="zap-field-val">Meeting Minutes (Workhorse Folder)</span></div>
-          <div class="zap-field"><span class="zap-field-key">Include subfolders?</span><span class="zap-field-val">False</span></div>
-          <div class="zap-field"><span class="zap-field-key">Include deleted files?</span><span class="zap-field-val">Only return non-deleted files</span></div>
-          <div class="zap-field"><span class="zap-field-key">Account</span><span class="zap-field-val">agents@perigonpartners.co.uk</span></div>
+        <div class="zap-config">
+          <div class="zap-row"><span>Folder monitored</span><span>Meeting Minutes (Workhorse Folder)</span></div>
+          <div class="zap-row"><span>Include subfolders?</span><span>False</span></div>
+          <div class="zap-row"><span>Include deleted files?</span><span>Only return non-deleted files</span></div>
+          <div class="zap-row"><span>Account</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="38595f5d564c4b78485d4a515f575648594a4c565d4a4b165b57164d53">[email&#160;protected]</a></span></div>
         </div>
-        <div class="callout tip"><span class="callout-icon">💡</span><div>This trigger fires on the converted Google Doc created by the Meeting Note Bot — not on the .docx upload itself. There can be a 2–3 minute delay between the .docx upload and this step firing.</div></div>
+        <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>This trigger fires on the converted Google Doc created by the Meeting Note Bot — not on the .docx upload itself. There can be a 2–3 minute delay between the .docx upload and this step firing.</p></div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-step-header"><div class="zap-num">2</div><div><div class="zap-title">Get Transcript Content</div><div class="zap-subtitle">Action · Google Docs · Get Document Content</div></div></div>
+      <div class="zap-header"><div class="zap-num">2</div><div><div class="zap-title">Get Transcript Content</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Google Docs &nbsp;&#183;&nbsp; Get Document Content</div></div></div>
       <div class="zap-body">
         <p>Reads the full plain-text content of the Google Doc identified in Step 1. This gives the AI in Step 3 a clean, readable version of the transcript to work from.</p>
-        <div class="zap-fields">
-          <div class="zap-field"><span class="zap-field-key">App</span><span class="zap-field-val">Google Docs</span></div>
-          <div class="zap-field"><span class="zap-field-key">Action event</span><span class="zap-field-val">Get Document Content</span></div>
-          <div class="zap-field"><span class="zap-field-key">Account</span><span class="zap-field-val">agents@perigonpartners.co.uk</span></div>
-          <div class="zap-field"><span class="zap-field-key">Document</span><span class="zap-field-val">Google Doc ID from Step 1</span></div>
+        <div class="zap-config">
+          <div class="zap-row"><span>App</span><span>Google Docs</span></div>
+          <div class="zap-row"><span>Action event</span><span>Get Document Content</span></div>
+          <div class="zap-row"><span>Account</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b2a2c2e253f380b3b2e39222c24253b2a393f252e3938652824653e20">[email&#160;protected]</a></span></div>
+          <div class="zap-row"><span>Document</span><span>Google Doc ID from Step 1</span></div>
         </div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-step-header"><div class="zap-num">3</div><div><div class="zap-title">Refocusing meeting notes for LinkedIn</div><div class="zap-subtitle">Action · AI by Zapier · GPT-5.2 · Authentication: sally@perigonpartners.co.uk</div></div></div>
+      <div class="zap-header"><div class="zap-num">3</div><div><div class="zap-title">Refocusing meeting notes for LinkedIn</div><div class="zap-app">Action &nbsp;&#183;&nbsp; AI by Zapier &nbsp;&#183;&nbsp; GPT-5.2 &nbsp;&#183;&nbsp; Authentication: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a697b7676635a6a7f68737d75746a7b686e747f6869347975346f71">[email&#160;protected]</a></div></div></div>
       <div class="zap-body">
         <p>The first AI step. Reads the full transcript text from Step 2 and analyses it across five structured sections, selecting the 2–3 insights most useful for LinkedIn content. Sections 3 (Team Brain) and 5 (The Conversation We Keep Having) are explicitly weighted as the highest-value sources. The output of this step becomes the input for Step 4.</p>
-        <div class="zap-fields">
-          <div class="zap-field"><span class="zap-field-key">Provider</span><span class="zap-field-val">OpenAI</span></div>
-          <div class="zap-field"><span class="zap-field-key">Model</span><span class="zap-field-val">GPT-5.2</span></div>
-          <div class="zap-field"><span class="zap-field-key">Authentication</span><span class="zap-field-val">sally@perigonpartners.co.uk</span></div>
-          <div class="zap-field"><span class="zap-field-key">Input</span><span class="zap-field-val">Document text content from Step 2</span></div>
-          <div class="zap-field"><span class="zap-field-key">Knowledge source</span><span class="zap-field-val">Perigon Partners – Knowledge Source (for AI by Zapier)</span></div>
+        <div class="zap-config">
+          <div class="zap-row"><span>Provider</span><span>OpenAI</span></div>
+          <div class="zap-row"><span>Model</span><span>GPT-5.2</span></div>
+          <div class="zap-row"><span>Authentication</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2c3e3333261f2f3a2d363830312f3e2d2b313a2d2c713c30712a34">[email&#160;protected]</a></span></div>
+          <div class="zap-row"><span>Input</span><span>Document text content from Step 2</span></div>
+          <div class="zap-row"><span>Knowledge source</span><span>Perigon Partners – Knowledge Source (for AI by Zapier)</span></div>
         </div>
-        <div class="prompt-label">Prompt (verbatim)</div>
-        <div class="prompt-block">I include the transcript of a recent Teams meeting within Perigon Partners, a business consultancy that helps Chairs and CEOs in the UK get aligned on the one strategy that matters—integrating growth, sustainability, and resilience into a plan the board trusts and the exec team can execute. Help me analyze the transcript by answering the following questions, organized by section:
+        <div class="zap-prompt"><div class="zap-prompt-label">Prompt (verbatim)</div>I include the transcript of a recent Teams meeting within Perigon Partners, a business consultancy that helps Chairs and CEOs in the UK get aligned on the one strategy that matters—integrating growth, sustainability, and resilience into a plan the board trusts and the exec team can execute. Help me analyze the transcript by answering the following questions, organized by section:
 
 SECTION 1: Client World
 - What current developments with clients are interesting, instructive, or noteworthy for reflection?
@@ -795,28 +440,27 @@ INSTRUCTIONS:
 - Do not fully respond to every question.
 - Aim to choose two or three comprehensive answers across the sections to produce strong, focused ideas for Emma's LinkedIn posts.
 - Sections that typically yield the best content are Section 3 (Team Brain) and Section 5 (The Conversation We Keep Having) — these sections contain the most distinct and human insights.</div>
-        <div class="callout tip"><span class="callout-icon">💡</span><div>If the Step 3 output is thin or too general, the meeting itself likely contained limited strategic discussion. This cannot be improved by changing the prompt — it reflects the quality of the source material.</div></div>
+        <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>If the Step 3 output is thin or too general, the meeting itself likely contained limited strategic discussion. This cannot be improved by changing the prompt — it reflects the quality of the source material.</p></div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-step-header"><div class="zap-num">4</div><div><div class="zap-title">Generate 3 posts for Emma</div><div class="zap-subtitle">Action · AI by Zapier · GPT-5.2 · Prompt builder: Custom prompt</div></div></div>
+      <div class="zap-header"><div class="zap-num">4</div><div><div class="zap-title">Analyze and Return Data &nbsp;/&nbsp; Generate 3 posts for Emma</div><div class="zap-app">Action &nbsp;&#183;&nbsp; AI by Zapier &nbsp;&#183;&nbsp; GPT-5.2 &nbsp;&#183;&nbsp; Prompt builder: Custom prompt</div></div></div>
       <div class="zap-body">
         <p>The second AI step — the post generator. Takes the structured Step 3 analysis as its primary input and generates three complete LinkedIn posts in Emma's voice, one per post type. Uses five knowledge base files to anchor every post to Emma's style, her ICP's pain points, and Perigon's positioning. Output is formatted in HTML, ready for the email step. The Zapier Prompt Builder rates this prompt as <strong>Excellent</strong>.</p>
-        <div class="zap-fields">
-          <div class="zap-field"><span class="zap-field-key">Provider</span><span class="zap-field-val">OpenAI</span></div>
-          <div class="zap-field"><span class="zap-field-key">Model</span><span class="zap-field-val">GPT-5.2</span></div>
-          <div class="zap-field"><span class="zap-field-key">Build mode</span><span class="zap-field-val">Custom prompt</span></div>
-          <div class="zap-field"><span class="zap-field-key">Input</span><span class="zap-field-val">Step 3 output (refocused meeting analysis)</span></div>
-          <div class="zap-field"><span class="zap-field-key">Knowledge source 1</span><span class="zap-field-val">Perigon Partners – Knowledge Source (for AI by Zapier)</span></div>
-          <div class="zap-field"><span class="zap-field-key">Knowledge source 2</span><span class="zap-field-val">ICP 20 Pain Points for LinkedIn</span></div>
-          <div class="zap-field"><span class="zap-field-key">Knowledge source 3</span><span class="zap-field-val">2025 LinkedIn Presence Review</span></div>
-          <div class="zap-field"><span class="zap-field-key">Knowledge source 4</span><span class="zap-field-val">Emma Walford LinkedIn Voice &amp; Persona Guide</span></div>
-          <div class="zap-field"><span class="zap-field-key">Knowledge source 5</span><span class="zap-field-val">ESG Compliance Table (Up To Date)</span></div>
-          <div class="zap-field"><span class="zap-field-key">Output format</span><span class="zap-field-val">HTML (rendered in email body)</span></div>
+        <div class="zap-config">
+          <div class="zap-row"><span>Provider</span><span>OpenAI</span></div>
+          <div class="zap-row"><span>Model</span><span>GPT-5.2</span></div>
+          <div class="zap-row"><span>Build mode</span><span>Custom prompt</span></div>
+          <div class="zap-row"><span>Input</span><span>Step 3 output (refocused meeting analysis)</span></div>
+          <div class="zap-row"><span>Knowledge source 1</span><span>Perigon Partners – Knowledge Source (for AI by Zapier)</span></div>
+          <div class="zap-row"><span>Knowledge source 2</span><span>ICP 20 Pain Points for LinkedIn</span></div>
+          <div class="zap-row"><span>Knowledge source 3</span><span>2025 LinkedIn Presence Review</span></div>
+          <div class="zap-row"><span>Knowledge source 4</span><span>Emma Walford LinkedIn Voice &amp; Persona Guide</span></div>
+          <div class="zap-row"><span>Knowledge source 5</span><span>ESG Compliance Table (Up To Date)</span></div>
+          <div class="zap-row"><span>Output format</span><span>HTML (rendered in email body)</span></div>
         </div>
-        <div class="prompt-label">Prompt (verbatim)</div>
-        <div class="prompt-block">You are a LinkedIn ghostwriter for Emma Walford, Founder of Perigon Partners. Your entire job is to produce Linkedin posts that sound exactly like Emma - not like a LinkedIn ghostwriter, not like a consultant, not like an AI.
+        <div class="zap-prompt"><div class="zap-prompt-label">Prompt (verbatim)</div>You are a LinkedIn ghostwriter for Emma Walford, Founder of Perigon Partners. Your entire job is to produce Linkedin posts that sound exactly like Emma - not like a LinkedIn ghostwriter, not like a consultant, not like an AI.
 
 Do not write any post copy without looking through the 'Emma Walford LinkedIn Voice &amp; Persona Guide (LinkedIn Ghostwriting instructions)' first.
 
@@ -838,47 +482,28 @@ IMPORTANT - give the output in HTML formatting
 
 FINAL CHECK BEFORE OUTPUTTING:
 Read each post idea back against Emma's top-performing posts in the knowledge base. Ask: would Emma actually post this? If the honest answer is no — rewrite it until the answer is yes.</div>
-        <div class="callout warn"><span class="callout-icon">⚠️</span><div>The variable <code>{{=gives['349040746']["output"]}}</code> is the Zapier reference to the Step 3 output. If this Zap is ever rebuilt from scratch, this reference ID will need to be updated to match the new Step 3 output field. The number <code>349040746</code> is the internal Zapier step ID for Step 3.</div></div>
+        <div class="callout warning" style="margin-top:12px;"><div class="callout-icon">&#9888;&#65039;</div><p>The variable <code>&#123;&#123;=gives['349040746']["output"]&#125;&#125;</code> is the Zapier reference to the Step 3 output. If this Zap is ever rebuilt from scratch, this reference ID will need to be updated to match the new Step 3 output field. The number <code>349040746</code> is the internal Zapier step ID for Step 3.</p></div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-step-header"><div class="zap-num">5</div><div><div class="zap-title">Send Email</div><div class="zap-subtitle">Action · Microsoft Outlook · Send Email</div></div></div>
+      <div class="zap-header"><div class="zap-num">5</div><div><div class="zap-title">Send Email</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Microsoft Outlook &nbsp;&#183;&nbsp; Send Email</div></div></div>
       <div class="zap-body">
         <p>Sends the HTML-formatted posts directly to Emma's inbox. No attachments. The email body contains the three complete posts from Step 4, rendered in HTML. Sent from the agents@ shared mailbox so Emma can reply or forward easily.</p>
-        <div class="zap-fields">
-          <div class="zap-field"><span class="zap-field-key">Send from (Shared Mailbox)</span><span class="zap-field-val">agents@perigonpartners.co.uk</span></div>
-          <div class="zap-field"><span class="zap-field-key">To</span><span class="zap-field-val">emma@perigonpartners.co.uk</span></div>
-          <div class="zap-field"><span class="zap-field-key">CC</span><span class="zap-field-val">—</span></div>
-          <div class="zap-field"><span class="zap-field-key">BCC</span><span class="zap-field-val">—</span></div>
-          <div class="zap-field"><span class="zap-field-key">Body type</span><span class="zap-field-val">HTML</span></div>
-          <div class="zap-field"><span class="zap-field-key">Body content</span><span class="zap-field-val">HTML output from Step 4</span></div>
-          <div class="zap-field"><span class="zap-field-key">Attachments</span><span class="zap-field-val">None</span></div>
+        <div class="zap-config">
+          <div class="zap-row"><span>Send from (Shared Mailbox)</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="432224262d3730033326312a242c2d332231372d2631306d202c6d3628">[email&#160;protected]</a></span></div>
+          <div class="zap-row"><span>To</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e0858d8d81a090859289878f8e908192948e859293ce838fce958b">[email&#160;protected]</a></span></div>
+          <div class="zap-row"><span>CC</span><span>—</span></div>
+          <div class="zap-row"><span>BCC</span><span>—</span></div>
+          <div class="zap-row"><span>Body type</span><span>HTML</span></div>
+          <div class="zap-row"><span>Body content</span><span>HTML output from Step 4</span></div>
+          <div class="zap-row"><span>Attachments</span><span>None</span></div>
         </div>
       </div>
     </div>
 
     <h3>Knowledge base files — what each one does</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>File</th><th>Purpose in the automation</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Perigon Partners – Knowledge Source (for AI by Zapier)</strong></td><td>Used by both Step 3 and Step 4. Gives the AI context about Perigon's team, services, mission, and clients. Ensures posts refer to the firm accurately. <strong>Update this file whenever the team, services, or positioning changes.</strong></td></tr>
-          <tr><td><strong>Emma Walford LinkedIn Voice &amp; Persona Guide</strong></td><td>Defines Emma's voice, hook types, structural patterns, language preferences, and what to avoid. The primary style anchor for Step 4 — the most important knowledge file for post quality.</td></tr>
-          <tr><td><strong>ICP 20 Pain Points for LinkedIn</strong></td><td>Maps 20 ICP pain points to post types and angles. Ensures every post idea connects to a real, specific audience need rather than a generic topic.</td></tr>
-          <tr><td><strong>2025 LinkedIn Presence Review</strong></td><td>Documents what worked and what was missing in 2025. Helps the AI calibrate the balance between insight and invitation, and avoid repeating patterns that underperformed.</td></tr>
-          <tr><td><strong>ESG Compliance Table (Up To Date)</strong></td><td>Current ESG and regulatory reference data. Used by Step 4 when generating Thought Leadership or CTA posts on regulatory topics — ensures accuracy on specific compliance details.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="callout tip"><span class="callout-icon">💡</span><div>Knowledge base files should be reviewed quarterly. The <strong>ESG Compliance Table</strong> should be kept current as regulations change. The <strong>Perigon Partners Knowledge Source</strong> should be updated whenever the team or services change. Contact <strong>Sally Weatherly</strong> to update any file in Zapier.</div></div>
-  </section>
-
-</main>
-
-<footer class="doc-footer">
-  <strong>Perigon Partners</strong> · LinkedIn Post Generator SOP v1.2 · February 2026 · System owner: Sally Weatherly, Growth &amp; Operations Lead
-</footer>
-
-</body>
-</html>
+    <table style="margin-top:12px;">
+      <thead><tr><th style="width:44%;">File</th><th>Purpose in the automation</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">Perigon Partners – Knowledge Source (for AI by Zapier)</td><td>Used by both Step 3 and Step 4. Gives the AI context about Perigon's team, services, mission, and clients. Ensures posts refer to the firm accurately. <strong>Update this file whenever the team, services, or positioning changes.</strong></td></tr>
