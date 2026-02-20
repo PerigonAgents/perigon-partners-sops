@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perigon Partners — SOPs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --gold: #c9a84c;
+      --cream: #faf8f4;
+      --white: #ffffff;
+      --grey-200: #e8e6e1;
+      --grey-400: #9b9690;
+      --grey-800: #2d2b27;
+      --radius: 8px;
+      --shadow: 0 2px 8px rgba(15,31,61,0.08), 0 8px 32px rgba(15,31,61,0.06);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--grey-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--navy);
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .org-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+    }
+    main {
+      flex: 1;
+      max-width: 720px;
+      margin: 48px auto;
+      padding: 0 24px;
+      width: 100%;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-400);
+      margin-bottom: 16px;
+    }
+    .sop-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .sop-card {
+      background: var(--white);
+      border: 1px solid var(--grey-200);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+    }
+    .sop-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 16px rgba(15,31,61,0.12);
+      transform: translateY(-1px);
+    }
+    .sop-card-info {}
+    .sop-card-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .sop-card-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .sop-card-desc {
+      font-size: 13px;
+      color: var(--grey-400);
+    }
+    .sop-card-arrow {
+      font-size: 20px;
+      color: var(--grey-400);
+      flex-shrink: 0;
+    }
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 20px 24px;
+      font-size: 12px;
+    }
+    footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="org-label">Perigon Partners</div>
+    <h1>Standard Operating Procedures</h1>
+    <p>Internal automation tools documentation</p>
+  </header>
+  <main>
+    <div class="section-label">All SOPs</div>
+    <div class="sop-grid">
+      <a class="sop-card" href="meeting-note-bot-sop.html">
+        <div class="sop-card-info">
+          <div class="sop-card-tag">v2.0 · February 2026</div>
+          <div class="sop-card-title">Meeting Note Bot</div>
+          <div class="sop-card-desc">Automated Teams transcript → branded meeting notes pipeline</div>
+        </div>
+        <div class="sop-card-arrow">→</div>
+      </a>
+      <a class="sop-card" href="linkedin-post-generator-sop.html">
+        <div class="sop-card-info">
+          <div class="sop-card-tag">v1.2 · February 2026</div>
+          <div class="sop-card-title">LinkedIn Post Generator</div>
+          <div class="sop-card-desc">Automatic LinkedIn content from meeting transcripts for Emma</div>
+        </div>
+        <div class="sop-card-arrow">→</div>
+      </a>
+    </div>
+  </main>
+  <footer>
+    <strong>Perigon Partners</strong> · System owner: Sally Weatherly, Growth &amp; Operations Lead
+  </footer>
+</body>
+</html>
