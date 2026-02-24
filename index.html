@@ -9,16 +9,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:        #1d3657;
-      --green:       #2cac6c;
-      --white:       #ffffff;
-      --off-white:   #f7f8f9;
-      --border:      #e8eaed;
-      --text:        #1d3657;
-      --muted:       #6b7a8d;
+      --navy: #1d3657;
+      --green: #2cac6c;
+      --white: #ffffff;
+      --off-white: #f7f8f9;
+      --border: #e8eaed;
+      --text: #1d3657;
+      --muted: #6b7a8d;
       --light-muted: #9aa5b0;
       --green-light: #eef8f3;
-      --navy-light:  #eef1f5;
+      --navy-light: #eef1f5;
     }
 
     body {
@@ -40,27 +40,28 @@
       gap: 24px;
       flex-wrap: wrap;
     }
-    .logo img {
-      height: 44px;
-      width: auto;
-      display: block;
-    }
-    .header-right {
-      text-align: right;
-    }
-    .header-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 4px;
-    }
-    .header-title {
-      font-size: 22px;
-      font-weight: 700;
+    .logo img { height: 44px; width: auto; display: block; }
+    .header-right { text-align: right; }
+    .header-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
+    .header-title { font-size: 22px; font-weight: 700; color: var(--white); }
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
       color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 11px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      transition: background 0.15s, transform 0.12s;
+      white-space: nowrap;
     }
+    .header-cta:hover { background: #25965e; transform: translateY(-1px); }
+    .header-cta-icon { font-size: 15px; }
 
     /* ── HERO STRIP ── */
     .hero {
@@ -68,32 +69,14 @@
       padding: 48px 64px 44px;
       border-bottom: 3px solid var(--green);
     }
-    .hero p {
-      max-width: 600px;
-      font-size: 15px;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.7;
-    }
+    .hero p { max-width: 600px; font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; }
 
     /* ── MAIN ── */
-    main {
-      flex: 1;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 52px 40px 80px;
-      width: 100%;
-    }
+    main { flex: 1; max-width: 900px; margin: 0 auto; padding: 52px 40px 80px; width: 100%; }
 
     /* ── SECTION BLOCKS ── */
-    .sop-section {
-      margin-bottom: 56px;
-    }
-    .sop-section-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 20px;
-    }
+    .sop-section { margin-bottom: 56px; }
+    .sop-section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
     .section-badge {
       display: inline-flex;
       align-items: center;
@@ -105,36 +88,15 @@
       padding: 6px 14px;
       border-radius: 4px;
     }
-    .section-badge.internal {
-      background: var(--navy);
-      color: var(--white);
-    }
-    .section-badge.external {
-      background: var(--green);
-      color: var(--white);
-    }
-    .section-badge .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .section-badge.internal { background: var(--navy); color: var(--white); }
+    .section-badge.external { background: var(--green); color: var(--white); }
+    .section-badge .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .section-badge.internal .dot { background: var(--green); }
     .section-badge.external .dot { background: rgba(255,255,255,0.6); }
-
-    .section-desc {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
+    .section-desc { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
 
     /* ── SOP CARDS ── */
-    .sop-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .sop-grid { display: flex; flex-direction: column; gap: 12px; }
     .sop-card {
       background: var(--white);
       border: 1px solid var(--border);
@@ -149,64 +111,30 @@
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.12s;
       box-shadow: 0 1px 3px rgba(29,54,87,0.06);
     }
-    .sop-card:hover {
+    .sop-card:hover { border-color: var(--green); box-shadow: 0 4px 20px rgba(29,54,87,0.1); transform: translateY(-2px); }
+
+    /* ── NEW: highlighted action card style ── */
+    .sop-card.highlight {
       border-color: var(--green);
-      box-shadow: 0 4px 20px rgba(29,54,87,0.1);
-      transform: translateY(-2px);
+      background: var(--green-light);
     }
-    .sop-card-left {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex: 1;
+    .sop-card.highlight:hover {
+      box-shadow: 0 4px 24px rgba(44,172,108,0.18);
     }
-    .sop-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
+
+    .sop-card-left { display: flex; align-items: center; gap: 18px; flex: 1; }
+    .sop-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
     .sop-icon.green-bg { background: var(--green-light); }
-    .sop-icon.navy-bg  { background: var(--navy-light); }
-
-    .sop-card-tag {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
+    .sop-icon.green-solid { background: var(--green); }
+    .sop-icon.navy-bg { background: var(--navy-light); }
+    .sop-card-tag { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
     .sop-card-tag.green-tag { color: var(--green); }
-    .sop-card-tag.navy-tag  { color: var(--navy); }
-
-    .sop-card-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 3px;
-    }
-    .sop-card-desc {
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .sop-card-meta {
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .sop-version {
-      font-size: 11px;
-      color: var(--light-muted);
-      margin-bottom: 6px;
-    }
-    .sop-arrow {
-      font-size: 18px;
-      color: var(--green);
-      font-weight: 700;
-    }
+    .sop-card-tag.navy-tag { color: var(--navy); }
+    .sop-card-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+    .sop-card-desc { font-size: 13px; color: var(--muted); }
+    .sop-card-meta { text-align: right; flex-shrink: 0; }
+    .sop-version { font-size: 11px; color: var(--light-muted); margin-bottom: 6px; }
+    .sop-arrow { font-size: 18px; color: var(--green); font-weight: 700; }
 
     /* ── EMPTY STATE ── */
     .coming-soon {
@@ -223,11 +151,7 @@
     .coming-soon-icon { font-size: 20px; }
 
     /* ── DIVIDER ── */
-    .section-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0 0 52px;
-    }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 52px; }
 
     /* ── FOOTER ── */
     footer {
@@ -252,90 +176,109 @@
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <img src="https://cdn.prod.website-files.com/688cc4f9806ddae7e1e220e9/688cd5dbb1b1f69db17f0f05_Perigon%20Logo%20Large%20White%20Cropped.png" alt="Perigon Partners"/>
-    </div>
-    <div class="header-right">
-      <div class="header-label">Documentation</div>
-      <div class="header-title">Standard Operating Procedures</div>
-    </div>
-  </header>
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="https://cdn.prod.website-files.com/688cc4f9806ddae7e1e220e9/688cd5dbb1b1f69db17f0f05_Perigon%20Logo%20Large%20White%20Cropped.png" alt="Perigon Partners"/>
+  </div>
+  <div class="header-right">
+    <div class="header-label">Implementation</div>
+    <div class="header-title">Perigon Internal Dashboard</div>
+  </div>
+  <a class="header-cta" href="submit-transcript.html">
+    <span class="header-cta-icon">🎙️</span> Submit Meeting Transcript
+  </a>
+</header>
 
-  <!-- HERO -->
-  <div class="hero">
-    <p>Reference guides for Perigon Partners' automation tools — how to use them, how they work, and how to maintain them. Internal SOPs cover team-facing tools; external SOPs cover client-facing tools.</p>
+<!-- HERO -->
+<div class="hero">
+  <p>Contains links to all Perigon internal and external tools. Also includes reference guides (SOPs) for Perigon tools — how to use them, how they work, and how to maintain them.</p>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- INTERNAL TOOLS -->
+  <div class="sop-section">
+    <div class="sop-section-header">
+      <div class="section-badge internal"><span class="dot"></span>Internal Tools</div>
+    </div>
+    <p class="section-desc">Automations used by the Perigon team to run operations — meeting notes, content generation, and internal workflows.</p>
+    <div class="sop-grid">
+
+      <!-- Existing card 1 -->
+      <a class="sop-card" href="meeting-note-bot-sop.html">
+        <div class="sop-card-left">
+          <div class="sop-icon navy-bg">📋</div>
+          <div class="sop-card-info">
+            <div class="sop-card-tag navy-tag">Internal · Zapier</div>
+            <div class="sop-card-title">Meeting Note Bot</div>
+            <div class="sop-card-desc">Automated Teams transcript → branded meeting notes pipeline</div>
+          </div>
+        </div>
+        <div class="sop-card-meta">
+          <div class="sop-version">v2.0 · Feb 2026</div>
+          <div class="sop-arrow">→</div>
+        </div>
+      </a>
+
+      <!-- Existing card 2 -->
+      <a class="sop-card" href="linkedin-post-generator-sop.html">
+        <div class="sop-card-left">
+          <div class="sop-icon navy-bg">✍️</div>
+          <div class="sop-card-info">
+            <div class="sop-card-tag navy-tag">Internal · Zapier</div>
+            <div class="sop-card-title">LinkedIn Post Generator</div>
+            <div class="sop-card-desc">Automatic LinkedIn content drafts for Emma from meeting transcripts</div>
+          </div>
+        </div>
+        <div class="sop-card-meta">
+          <div class="sop-version">v1.2 · Feb 2026</div>
+          <div class="sop-arrow">→</div>
+        </div>
+      </a>
+
+      <!-- ✅ NEW CARD — Submit Meeting Transcript -->
+      <a class="sop-card highlight" href="submit-transcript.html">
+        <div class="sop-card-left">
+          <div class="sop-icon green-solid">🎙️</div>
+          <div class="sop-card-info">
+            <div class="sop-card-tag green-tag">Internal · Meeting Notes</div>
+            <div class="sop-card-title">Submit Meeting Transcript</div>
+            <div class="sop-card-desc">Manually submit a transcript to generate branded meeting notes &amp; action points</div>
+          </div>
+        </div>
+        <div class="sop-card-meta">
+          <div class="sop-version">v1.0 · Feb 2026</div>
+          <div class="sop-arrow">→</div>
+        </div>
+      </a>
+
+    </div>
   </div>
 
-  <!-- MAIN -->
-  <main>
+  <hr class="section-divider"/>
 
-    <!-- INTERNAL TOOLS -->
-    <div class="sop-section">
-      <div class="sop-section-header">
-        <div class="section-badge internal"><span class="dot"></span>Internal Tools</div>
-      </div>
-      <p class="section-desc">Automations used by the Perigon team to run operations — meeting notes, content generation, and internal workflows.</p>
-      <div class="sop-grid">
-
-        <a class="sop-card" href="meeting-note-bot-sop.html">
-          <div class="sop-card-left">
-            <div class="sop-icon navy-bg">📋</div>
-            <div class="sop-card-info">
-              <div class="sop-card-tag navy-tag">Internal · Zapier</div>
-              <div class="sop-card-title">Meeting Note Bot</div>
-              <div class="sop-card-desc">Automated Teams transcript → branded meeting notes pipeline</div>
-            </div>
-          </div>
-          <div class="sop-card-meta">
-            <div class="sop-version">v2.0 · Feb 2026</div>
-            <div class="sop-arrow">→</div>
-          </div>
-        </a>
-
-        <a class="sop-card" href="linkedin-post-generator-sop.html">
-          <div class="sop-card-left">
-            <div class="sop-icon navy-bg">✍️</div>
-            <div class="sop-card-info">
-              <div class="sop-card-tag navy-tag">Internal · Zapier</div>
-              <div class="sop-card-title">LinkedIn Post Generator</div>
-              <div class="sop-card-desc">Automatic LinkedIn content drafts for Emma from meeting transcripts</div>
-            </div>
-          </div>
-          <div class="sop-card-meta">
-            <div class="sop-version">v1.2 · Feb 2026</div>
-            <div class="sop-arrow">→</div>
-          </div>
-        </a>
-
+  <!-- EXTERNAL TOOLS -->
+  <div class="sop-section">
+    <div class="sop-section-header">
+      <div class="section-badge external"><span class="dot"></span>External Tools</div>
+    </div>
+    <p class="section-desc">Client-facing tools and automations — diagnostics, interactive resources, and outward-facing workflows.</p>
+    <div class="sop-grid">
+      <div class="coming-soon">
+        <div class="coming-soon-icon">🔧</div>
+        External tool SOPs will appear here as they are built.
       </div>
     </div>
+  </div>
 
-    <hr class="section-divider"/>
+</main>
 
-    <!-- EXTERNAL TOOLS -->
-    <div class="sop-section">
-      <div class="sop-section-header">
-        <div class="section-badge external"><span class="dot"></span>External Tools</div>
-      </div>
-      <p class="section-desc">Client-facing tools and automations — diagnostics, interactive resources, and outward-facing workflows.</p>
-      <div class="sop-grid">
-
-        <div class="coming-soon">
-          <div class="coming-soon-icon">🔧</div>
-          External tool SOPs will appear here as they are built.
-        </div>
-
-      </div>
-    </div>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <strong>Perigon Partners</strong> &nbsp;·&nbsp; System owner: Sally Weatherly, Growth &amp; Operations Lead &nbsp;·&nbsp; For updates contact Sally
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <strong>Perigon Partners</strong> &nbsp;·&nbsp; System owner: Sally Weatherly, Growth &amp; Operations Lead &nbsp;·&nbsp; For updates contact Sally
+</footer>
 
 </body>
 </html>
