@@ -143,11 +143,11 @@
       <div class="flow-arrow">&#8594;</div>
       <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Drop file into SharePoint folder</div><div class="flow-tool">SharePoint</div></div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Receive notes in Teams &amp; email</div><div class="flow-tool">Teams + Outlook</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Receive notes in Teams</div><div class="flow-tool">TeamsAfter processing,</div></div>
     </div>
 
     <h3>What the bot produces</h3>
-    <p>After processing, every attendee receives a <strong>personalised email</strong> to their Perigon email address, plus a message is posted to the <strong>Perigon Teams channel</strong>. Both contain a link to the branded meeting notes document saved in SharePoint.</p>
+    <p>After processing, a message is posted to the Perigon Teams channel containing a link to the branded meeting notes document saved in SharePoint.</p>
     <p>At the same time, all named action points from the meeting are <strong>automatically added to the Perigon Weekly Action List</strong> in SharePoint — each action logged individually against the named owner.</p>
     <p>The meeting notes document itself is a fully formatted Word document (.docx) stored in SharePoint, containing:</p>
     <ul>
@@ -162,7 +162,7 @@
       <div class="timeline-item"><div class="time">0 min</div><p>You drop the .docx transcript into the SharePoint trigger folder</p></div>
       <div class="timeline-item"><div class="time">~1–2 min</div><p>Zapier detects the new file and begins processing</p></div>
       <div class="timeline-item"><div class="time">~3–5 min</div><p>AI generates the meeting notes; branded Word document is created and saved to SharePoint</p></div>
-      <div class="timeline-item"><div class="time">~5–7 min</div><p>Teams message posted and individual emails sent to all attendees. Action points logged in the Perigon Weekly Action List.</p></div>
+      <div class="timeline-item"><div class="time">~5–7 min</div><p>Teams message posted. Action points logged in the Perigon Weekly Action List.</p></div>
     </div>
   </div>
 
@@ -200,11 +200,10 @@
     <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p><strong>Only .docx transcripts should be placed in this folder.</strong> Uploading other file types may cause the automation to fail or produce unexpected results.</p></div>
     <div class="callout tip"><div class="callout-icon">&#128161;</div><p>You can also access this folder via the direct link included in the email notifications sent to all attendees after every meeting.</p></div>
 
-    <h3 id="step-output">Step 4 — Check Teams and your email for the output</h3>
+    <h3 id="step-output">Step 4 — Check Teams for the output</h3>
     <ol class="steps">
       <li><strong>Wait approximately 5–7 minutes</strong> The automation runs automatically in the background.</li>
       <li><strong>Check the Perigon Teams channel</strong> A message will be posted with the meeting summary and a link to the full notes.</li>
-      <li><strong>Check your Perigon email inbox</strong> Each attendee identified in the transcript receives a personalised email with a link to the meeting notes document.</li>
       <li><strong>Review the notes before sharing externally</strong> The meeting notes are saved as an editable Word document in SharePoint. Click the link in the Teams message or email to open and edit.</li>
       <li><strong>Check the action list has been updated</strong> Open the <a href="https://perigonpartners.sharepoint.com/:x:/s/Companystuff/IQCU8QroaZ3aT7ncISG2eDGcARyS8J4neTpfkUfuDarCvhs?e=XfN2i8" target="_blank">Perigon Weekly Action List</a> to confirm all named actions have been logged correctly.</li>
     </ol>
@@ -246,7 +245,7 @@
     </div>
 
     <div class="trouble-item">
-      <div class="trouble-problem">No Teams message or email received after uploading the .docx</div>
+      <div class="trouble-problem">No Teams message received after uploading the .docx</div>
       <div class="trouble-body">
         <div class="trouble-label">Likely cause</div>
         <p>File placed in the wrong SharePoint folder, Zapier is paused, or incorrect file type.</p>
@@ -255,24 +254,12 @@
           <li>Confirm the file is in the <strong>"Internal Meeting Transcripts — DROP HERE"</strong> folder on the Business Management SharePoint site — not in a subfolder or a different library.</li>
           <li>Confirm the file is <strong>.docx</strong> (not .vtt, .pdf, or .txt).</li>
           <li>Wait a full 10 minutes — the Zapier trigger can occasionally be delayed.</li>
-          <li>Check your Outlook spam/junk folder.</li>
           <li>If still no result, contact Sally and ask her to check Zapier for errors on the most recent run.</li>
         </ul>
       </div>
     </div>
 
-    <div class="trouble-item">
-      <div class="trouble-problem">Your name is missing from the email recipients or Teams message</div>
-      <div class="trouble-body">
-        <div class="trouble-label">Likely cause</div>
-        <p>The AI could not identify your name in the transcript, or your name is not yet mapped to an email address in the Zap.</p>
-        <div class="trouble-label">Steps to resolve</div>
-        <ul>
-          <li>Check that you spoke during the meeting — only active speakers are identified as attendees. Observers who did not speak may not be picked up.</li>
-          <li>If your name is consistently missed, contact Sally — your name-to-email mapping may need to be added to Step 6 of the Zap.</li>
-        </ul>
-      </div>
-    </div>
+  
 
     <div class="trouble-item">
       <div class="trouble-problem">Action points are missing from the Weekly Action List</div>
@@ -316,7 +303,7 @@
         <tr style="background:var(--bg);"><td style="font-weight:600;">1</td><td>Start recording at the <em>start</em> of the meeting</td><td>Forgetting to hit record until halfway through</td></tr>
         <tr><td style="font-weight:600;">2</td><td>Download transcript from Teams as <strong>.docx</strong></td><td>Downloading as .vtt instead of .docx</td></tr>
         <tr style="background:var(--bg);"><td style="font-weight:600;">3</td><td>Upload to SharePoint: <em>Business Management → Internal Meeting Transcripts — DROP HERE</em></td><td>Dropping the file in the wrong SharePoint folder or library</td></tr>
-        <tr><td style="font-weight:600;">4</td><td>Wait ~5–7 minutes, then check Teams and your email inbox</td><td>Checking a personal email instead of your Perigon address</td></tr>
+        <tr><td style="font-weight:600;">4</td><td>Wait ~5–7 minutes, then check Teams</td><td>Perigon Weekly Team Meet Chat</td></tr>
         <tr style="background:var(--bg);"><td style="font-weight:600;">5</td><td>Review and edit the Word doc in SharePoint before sharing externally</td><td>Forwarding the link to clients without reviewing first</td></tr>
         <tr><td style="font-weight:600;">6</td><td>Verify the Weekly Action List has updated correctly</td><td>Assuming all actions were captured — spot-check after each meeting</td></tr>
       </tbody>
