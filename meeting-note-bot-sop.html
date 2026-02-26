@@ -143,7 +143,7 @@
       <div class="flow-arrow">&#8594;</div>
       <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Drop file into SharePoint folder</div><div class="flow-tool">SharePoint</div></div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Receive notes in Teams</div><div class="flow-tool">TeamsAfter processing,</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Receive notes in Teams</div><div class="flow-tool">Microsoft Teams</div></div>
     </div>
 
     <h3>What the bot produces</h3>
@@ -198,13 +198,13 @@
       <li><strong>Drag and drop (or upload) the .docx file into this folder</strong> You do not need to rename the file.</li>
     </ol>
     <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p><strong>Only .docx transcripts should be placed in this folder.</strong> Uploading other file types may cause the automation to fail or produce unexpected results.</p></div>
-    <div class="callout tip"><div class="callout-icon">&#128161;</div><p>You can also access this folder via the direct link included in the email notifications sent to all attendees after every meeting.</p></div>
+    <div class="callout tip"><div class="callout-icon">&#128161;</div><p>You can also access this folder directly via the SharePoint link pinned in your Perigon Teams channel.</p></div>
 
     <h3 id="step-output">Step 4 — Check Teams for the output</h3>
     <ol class="steps">
       <li><strong>Wait approximately 5–7 minutes</strong> The automation runs automatically in the background.</li>
       <li><strong>Check the Perigon Teams channel</strong> A message will be posted with the meeting summary and a link to the full notes.</li>
-      <li><strong>Review the notes before sharing externally</strong> The meeting notes are saved as an editable Word document in SharePoint. Click the link in the Teams message or email to open and edit.</li>
+      <li><strong>Review the notes before sharing externally</strong> The meeting notes are saved as an editable Word document in SharePoint. Click the link in the Teams message to open and edit.</li>
       <li><strong>Check the action list has been updated</strong> Open the <a href="https://perigonpartners.sharepoint.com/:x:/s/Companystuff/IQCU8QroaZ3aT7ncISG2eDGcARyS8J4neTpfkUfuDarCvhs?e=XfN2i8" target="_blank">Perigon Weekly Action List</a> to confirm all named actions have been logged correctly.</li>
     </ol>
   </div>
@@ -282,7 +282,7 @@
         <p>The AI produces a first draft — some inaccuracy is expected, especially with speaker attribution or technical terminology.</p>
         <div class="trouble-label">Steps to resolve</div>
         <ul>
-          <li>Use the link in the Teams message or email to open the Word document in SharePoint and make corrections.</li>
+          <li>Use the link in the Teams message to open the Word document in SharePoint and make corrections.</li>
           <li>If someone joined without a proper Teams display name, they may appear as "Guest" or an email address.</li>
           <li>If a specific section is consistently wrong, report this to Sally so the AI prompt can be adjusted.</li>
         </ul>
@@ -314,7 +314,7 @@
   <div class="section" id="zapier">
     <div class="section-label">Section 05</div>
     <h2 class="section-title">Zapier technical reference</h2>
-    <p>This section is for anyone who needs to maintain, edit, or rebuild the automation. The Zap is named <strong>"Internal Teams Meeting Note Summary Tool"</strong> in the Perigon workspace. It has 19 steps (including a loop) and runs fully automatically once a .docx is dropped into the SharePoint trigger folder.</p>
+    <p>This section is for anyone who needs to maintain, edit, or rebuild the automation. The Zap is named <strong>"Internal Teams Meeting Note Summary Tool"</strong> in the Perigon workspace. It has 17 steps (including a loop) and runs fully automatically once a .docx is dropped into the SharePoint trigger folder.</p>
     <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>Only <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead) should make changes to this Zap. Editing a live Zap incorrectly can break the automation for the whole team. If you think something needs changing, flag it to Sally rather than editing directly.</p></div>
 
     <!-- Step 1 -->
@@ -360,7 +360,7 @@
     <div class="zap-step">
       <div class="zap-header"><div class="zap-num">4</div><div><div class="zap-title">Date / Time Formatter</div><div class="zap-app">Action &nbsp;·&nbsp; Formatter by Zapier</div></div></div>
       <div class="zap-body">
-        <p>Converts the SharePoint file timestamp (ISO format) into a human-readable date. This formatted date is used in the document name, Teams message, and email throughout the rest of the Zap.</p>
+        <p>Converts the SharePoint file timestamp (ISO format) into a human-readable date. This formatted date is used in the document name and Teams message throughout the rest of the Zap.</p>
         <div class="zap-config">
           <div class="zap-row"><span>Transform</span><span>Format</span></div>
           <div class="zap-row"><span>Input</span><span>Time Created from Step 1</span></div>
@@ -382,50 +382,11 @@
         <div class="zap-prompt"><div class="zap-prompt-label">Prompt</div>Please search the meeting transcript specifically for the names of individuals who have actively participated in this meeting. Focus exclusively on the names listed in the speaker names list and exclude any names that appear solely within the team attendees' speech. I need a single line of text that contains only the names of the people who contributed to the meeting, formatted with their names separated by commas.</div>
       </div>
     </div>
-
-    <!-- Step 6 -->
-    <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">6</div><div><div class="zap-title">Getting Email Addresses of Attendees</div><div class="zap-app">Action &nbsp;·&nbsp; AI by Zapier &nbsp;·&nbsp; openai/gpt-4o-mini</div></div></div>
-      <div class="zap-body">
-        <p>A second lightweight AI call that maps attendee names to their Perigon email addresses. The output is a plain list of email addresses — one per line — which is then split by Step 7 and used to send individual emails in Step 19.</p>
-        <div class="zap-config">
-          <div class="zap-row"><span>Model</span><span>openai/gpt-4o-mini</span></div>
-          <div class="zap-row"><span>Input: transcript</span><span>Text content from Step 3</span></div>
-        </div>
-        <div class="zap-prompt"><div class="zap-prompt-label">Prompt</div>Search the transcript for the names of the people attending this meeting.
-
-Output ONLY email addresses, one per line, with absolutely nothing else — no names, no labels, no punctuation, no explanation.
-
-If you find reference to 'Nick' output: nick@perigonpartners.co.uk
-If you find reference to 'Emma' output: emma@perigonpartners.co.uk
-If you find reference to 'Andrew' output: andrew@perigonpartners.co.uk
-If you find reference to 'Sally' output: sally@perigonpartners.co.uk
-
-Example of correct output:
-emma@perigonpartners.co.uk
-sally@perigonpartners.co.uk
-
-Do not include anything else whatsoever.</div>
-        <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>To add a new team member, add a new line to this prompt mapping their first name to their email address. Contact Sally to make this change.</p></div>
-      </div>
-    </div>
-
-    <!-- Step 7 -->
-    <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">7</div><div><div class="zap-title">Formatting List of Attendees</div><div class="zap-app">Action &nbsp;·&nbsp; Formatter by Zapier</div></div></div>
-      <div class="zap-body">
-        <p>Splits the email addresses from Step 6 (which are separated by new lines) into individual values. Zapier's Outlook step requires separate values per recipient — this step provides that.</p>
-        <div class="zap-config">
-          <div class="zap-row"><span>Transform</span><span>Split Text</span></div>
-          <div class="zap-row"><span>Input</span><span>Output from Step 5 (comma-separated names)</span></div>
-          <div class="zap-row"><span>Separator</span><span>New line (Shift + Enter in the field)</span></div>
-        </div>
-      </div>
     </div>
 
     <!-- Step 8 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">8</div><div><div class="zap-title">Generate Meeting Minutes</div><div class="zap-app">Action &nbsp;·&nbsp; AI by Zapier &nbsp;·&nbsp; GPT-4o</div></div></div>
+      <div class="zap-header"><div class="zap-num">6</div><div><div class="zap-title">Generate Meeting Minutes</div><div class="zap-app">Action &nbsp;·&nbsp; AI by Zapier &nbsp;·&nbsp; GPT-4o</div></div></div>
       <div class="zap-body">
         <p>The core AI step. A more capable model reads the full transcript and produces structured meeting minutes in three clearly separated sections. It uses the Perigon Partners Knowledge Source to correctly identify staff, roles, and client context. The output feeds the document template, Teams message, and action points loop.</p>
         <div class="zap-config">
@@ -493,11 +454,11 @@ Rules:
 
     <!-- Step 9 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">9</div><div><div class="zap-title">Splits Out Named Actions</div><div class="zap-app">Action &nbsp;·&nbsp; Code by Zapier (JavaScript)</div></div></div>
+      <div class="zap-header"><div class="zap-num">7</div><div><div class="zap-title">Splits Out Named Actions</div><div class="zap-app">Action &nbsp;·&nbsp; Code by Zapier (JavaScript)</div></div></div>
       <div class="zap-body">
-        <p>Parses the raw AI output from Step 8 into structured fields. It separates the Executive Summary, Meeting Notes themes, and Action Points into individual outputs. Action points are split into a <code>~~~</code>-delimited string so the loop in Step 14 can iterate over them one by one. It also strips any accidental Markdown formatting.</p>
+        <p>Parses the raw AI output from Step 8 into structured fields. It separates the Executive Summary, Meeting Notes themes, and Action Points into individual outputs. Action points are split into a <code>~~~</code>-delimited string so the loop in Step 12 can iterate over them one by one. It also strips any accidental Markdown formatting.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>Input: aiOutput</span><span>Text output from Step 8</span></div>
+          <div class="zap-row"><span>Input: aiOutput</span><span>Text output from Step 6</span></div>
           <div class="zap-row"><span>Outputs produced</span><span>summary, themes, actions_text, action_count, assignee_N, task_N</span></div>
         </div>
       </div>
@@ -505,7 +466,7 @@ Rules:
 
     <!-- Step 10 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">10</div><div><div class="zap-title">Creates Google Doc Minutes From Template</div><div class="zap-app">Action &nbsp;·&nbsp; Google Docs</div></div></div>
+      <div class="zap-header"><div class="zap-num">8</div><div><div class="zap-title">Creates Google Doc Minutes From Template</div><div class="zap-app">Action &nbsp;·&nbsp; Google Docs</div></div></div>
       <div class="zap-body">
         <p>Populates a pre-built Google Docs template with the AI-generated content to create a formatted interim document. This is a temporary working document — it is subsequently exported as a Word file and then deleted from Google Drive automatically.</p>
         <div class="zap-config">
@@ -513,9 +474,9 @@ Rules:
           <div class="zap-row"><span>Template document</span><span>Meeting Minutes Template</span></div>
           <div class="zap-row"><span>New document name</span><span>Perigon Internal Meeting — [Date from Step 4]</span></div>
           <div class="zap-row"><span>Template field: attendees</span><span>Attendee names from Step 5</span></div>
-          <div class="zap-row"><span>Template field: ExecutiveSummary</span><span>Summary output from Step 9</span></div>
-          <div class="zap-row"><span>Template field: MeetingNotes</span><span>Themes output from Step 9</span></div>
-          <div class="zap-row"><span>Template field: ActionPoints</span><span>Actions text from Step 9</span></div>
+          <div class="zap-row"><span>Template field: ExecutiveSummary</span><span>Summary output from Step 7</span></div>
+          <div class="zap-row"><span>Template field: MeetingNotes</span><span>Themes output from Step 7</span></div>
+          <div class="zap-row"><span>Template field: ActionPoints</span><span>Actions text from Step 7</span></div>
         </div>
         <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>The template merge fields must remain exactly as named — <code>{{attendees}}</code>, <code>{{ExecutiveSummary}}</code>, <code>{{MeetingNotes}}</code>, <code>{{ActionPoints}}</code> — if they are ever renamed, this step will break.</p></div>
       </div>
@@ -523,11 +484,11 @@ Rules:
 
     <!-- Step 11 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">11</div><div><div class="zap-title">Find a File</div><div class="zap-app">Action &nbsp;·&nbsp; Google Drive</div></div></div>
+      <div class="zap-header"><div class="zap-num">9</div><div><div class="zap-title">Find a File</div><div class="zap-app">Action &nbsp;·&nbsp; Google Drive</div></div></div>
       <div class="zap-body">
-        <p>Locates the newly created Google Doc from Step 10 by its exact filename. The file ID returned by this step is used in Step 12 to export the document.</p>
+        <p>Locates the newly created Google Doc from Step 10 by its exact filename. The file ID returned by this step is used in Step 10 to export the document.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>Filename</span><span>Title from Step 10 (exact match)</span></div>
+          <div class="zap-row"><span>Filename</span><span>Title from Step 8 (exact match)</span></div>
           <div class="zap-row"><span>Search type</span><span>Exact match</span></div>
           <div class="zap-row"><span>Drive</span><span>My Google Drive</span></div>
           <div class="zap-row"><span>Folder</span><span>Final Meeting Minutes</span></div>
@@ -537,11 +498,11 @@ Rules:
 
     <!-- Step 12 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">12</div><div><div class="zap-title">Exports Google Doc to Microsoft Word</div><div class="zap-app">Action &nbsp;·&nbsp; Google Drive</div></div></div>
+      <div class="zap-header"><div class="zap-num">10</div><div><div class="zap-title">Exports Google Doc to Microsoft Word</div><div class="zap-app">Action &nbsp;·&nbsp; Google Drive</div></div></div>
       <div class="zap-body">
         <p>Exports the Google Doc as a Microsoft Word (.docx) file. This is the format required for SharePoint storage and for the link shared with attendees.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>File</span><span>File ID from Step 11</span></div>
+          <div class="zap-row"><span>File</span><span>File ID from Step 9</span></div>
           <div class="zap-row"><span>Folder</span><span>Final Meeting Minutes</span></div>
           <div class="zap-row"><span>Export format</span><span>Microsoft Word (.docx)</span></div>
         </div>
@@ -550,13 +511,13 @@ Rules:
 
     <!-- Step 13 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">13</div><div><div class="zap-title">Uploads Meeting Minutes to SharePoint</div><div class="zap-app">Action &nbsp;·&nbsp; SharePoint</div></div></div>
+      <div class="zap-header"><div class="zap-num">11</div><div><div class="zap-title">Uploads Meeting Minutes to SharePoint</div><div class="zap-app">Action &nbsp;·&nbsp; SharePoint</div></div></div>
       <div class="zap-body">
         <p>Saves the final Word document to SharePoint. This is the permanent home for all meeting notes and the source of the link sent to attendees.</p>
         <div class="zap-config">
           <div class="zap-row"><span>Site</span><span>Business Management</span></div>
           <div class="zap-row"><span>Folder</span><span>Meeting Note Bot</span></div>
-          <div class="zap-row"><span>File name</span><span>Title from Step 12</span></div>
+          <div class="zap-row"><span>File name</span><span>Title from Step 10</span></div>
           <div class="zap-row"><span>Overwrite existing file?</span><span>Yes</span></div>
         </div>
       </div>
@@ -564,9 +525,9 @@ Rules:
 
     <!-- Step 14 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">14</div><div><div class="zap-title">Create Loop From Text</div><div class="zap-app">Action &nbsp;·&nbsp; Looping by Zapier <span class="loop-badge">Loop start</span></div></div></div>
+      <div class="zap-header"><div class="zap-num">12</div><div><div class="zap-title">Create Loop From Text</div><div class="zap-app">Action &nbsp;·&nbsp; Looping by Zapier <span class="loop-badge">Loop start</span></div></div></div>
       <div class="zap-body">
-        <p>Begins a loop that iterates over each action point individually. The <code>actions_text</code> field from Step 9 contains all action points joined by <code>~~~</code> — this step splits them apart so Steps 15, 16, and 17 run once per action.</p>
+        <p>Begins a loop that iterates over each action point individually. The <code>actions_text</code> field from Step 9 contains all action points joined by <code>~~~</code> — this step splits them apart so Steps 13, 14, and 15 run once per action.</p>
         <div class="zap-config">
           <div class="zap-row"><span>Values to loop: actions_text</span><span>Actions text output from Step 9</span></div>
           <div class="zap-row"><span>Text delimiter</span><span>~~~</span></div>
@@ -577,11 +538,11 @@ Rules:
 
     <!-- Step 15 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">15</div><div><div class="zap-title">Run JavaScript — Parse Assignee and Task</div><div class="zap-app">Action &nbsp;·&nbsp; Code by Zapier (JavaScript) <span class="loop-badge">Inside loop</span></div></div></div>
+      <div class="zap-header"><div class="zap-num">13</div><div><div class="zap-title">Run JavaScript — Parse Assignee and Task</div><div class="zap-app">Action &nbsp;·&nbsp; Code by Zapier (JavaScript) <span class="loop-badge">Inside loop</span></div></div></div>
       <div class="zap-body">
-        <p>Splits each looped action line (formatted as <code>Full Name | Task description</code>) into two separate fields: <code>assignee</code> and <code>task</code>. These are passed to Step 16 to populate the Excel action list.</p>
+        <p>Splits each looped action line (formatted as <code>Full Name | Task description</code>) into two separate fields: <code>assignee</code> and <code>task</code>. These are passed to Step 14 to populate the Excel action list.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>Input: line</span><span>Actions text from Step 14 (current loop item)</span></div>
+          <div class="zap-row"><span>Input: line</span><span>Actions text from Step 12 (current loop item)</span></div>
           <div class="zap-row"><span>Outputs produced</span><span>assignee, task</span></div>
         </div>
       </div>
@@ -589,7 +550,7 @@ Rules:
 
     <!-- Step 16 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">16</div><div><div class="zap-title">Adds Named Actions to Excel</div><div class="zap-app">Action &nbsp;·&nbsp; Microsoft Excel (SharePoint) <span class="loop-badge">Inside loop</span></div></div></div>
+      <div class="zap-header"><div class="zap-num">14</div><div><div class="zap-title">Adds Named Actions to Excel</div><div class="zap-app">Action &nbsp;·&nbsp; Microsoft Excel (SharePoint) <span class="loop-badge">Inside loop</span></div></div></div>
       <div class="zap-body">
         <p>Adds a new row to the Perigon Weekly Action List spreadsheet in SharePoint for each action point. Runs once per action in the loop.</p>
         <div class="zap-config">
@@ -608,21 +569,21 @@ Rules:
 
     <!-- Step 17 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">17</div><div><div class="zap-title">Stops the Loop When All Actions Are Listed</div><div class="zap-app">Action &nbsp;·&nbsp; Filter by Zapier <span class="loop-badge">Loop end</span></div></div></div>
+      <div class="zap-header"><div class="zap-num">15</div><div><div class="zap-title">Stops the Loop When All Actions Are Listed</div><div class="zap-app">Action &nbsp;·&nbsp; Filter by Zapier <span class="loop-badge">Loop end</span></div></div></div>
       <div class="zap-body">
-        <p>A filter step that ends the loop once all action points have been processed. After this, the Zap continues with Steps 18 and 19 once only.</p>
+        <p>A filter step that ends the loop once all action points have been processed. After this, the Zap continues with Step 16 once only.</p>
       </div>
     </div>
 
     <!-- Step 18 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">18</div><div><div class="zap-title">Send Chat Message to Perigon Teams Channel</div><div class="zap-app">Action &nbsp;·&nbsp; Microsoft Teams</div></div></div>
+      <div class="zap-header"><div class="zap-num">16</div><div><div class="zap-title">Send Chat Message to Perigon Teams Channel</div><div class="zap-app">Action &nbsp;·&nbsp; Microsoft Teams</div></div></div>
       <div class="zap-body">
         <p>Posts a summary message to the designated Perigon Teams channel. Includes the meeting date, the executive summary, a link to the full meeting notes in SharePoint, and a link to the Perigon Weekly Action List.</p>
         <div class="zap-prompt"><div class="zap-prompt-label">Message template</div>**Meeting Notes - [Date from Step 4]**
 **Summary**
 
-[Executive Summary from Step 9]
+[Executive Summary from Step 7]
 
 
 [📄 Full Meeting Notes Here]([SharePoint link from Step 13])
@@ -632,32 +593,15 @@ Rules:
 *Prepared by Perigon Partners Meeting Note Agent in Zapier.*</div>
       </div>
     </div>
+    </div>
 
     <!-- Step 19 -->
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">19</div><div><div class="zap-title">Sends Email to Attendees</div><div class="zap-app">Action &nbsp;·&nbsp; Microsoft Outlook</div></div></div>
+      <div class="zap-header"><div class="zap-num">17</div><div><div class="zap-title">Finds &amp; Deletes Temporary Google Doc</div><div class="zap-app">Action &nbsp;·&nbsp; Google Drive</div></div></div>
       <div class="zap-body">
-        <p>Sends a personalised email to every attendee identified in the transcript. Recipients are determined by the split email list from Step 7. The email contains a link to the meeting notes in SharePoint, a link to the Weekly Action List, and a reminder about how to trigger the automation for future meetings.</p>
+        <p>Finds and deletes the temporary Google Doc created in Step 8 from the Google Drive "Final Meeting Minutes" folder. This keeps the Google Drive clean — the permanent copy of the meeting notes is already saved in SharePoint.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>To</span><span>Split email values from Step 7 (one per attendee)</span></div>
-          <div class="zap-row"><span>Subject</span><span>Meeting Notes — Perigon Internal Meeting [Date from Step 4]</span></div>
-          <div class="zap-row"><span>Body type</span><span>HTML</span></div>
-        </div>
-        <div class="zap-prompt"><div class="zap-prompt-label">Email body template</div>I attach a link to editable meeting notes for the Perigon Internal Meeting on [Date] here.
-
-The Perigon weekly action list has been updated to include named actions from this meeting. You can view all actions here.
-
-As a reminder, any transcript recording from your internal meetings can be automatically produced by dropping the .docx file from Teams into the OneDrive/SharePoint folder here.</div>
-      </div>
-    </div>
-
-    <!-- Step 20 (delete) -->
-    <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">20</div><div><div class="zap-title">Finds &amp; Deletes Temporary Google Doc</div><div class="zap-app">Action &nbsp;·&nbsp; Google Drive</div></div></div>
-      <div class="zap-body">
-        <p>Finds and deletes the temporary Google Doc created in Step 10 from the Google Drive "Final Meeting Minutes" folder. This keeps the Google Drive clean — the permanent copy of the meeting notes is already saved in SharePoint.</p>
-        <div class="zap-config">
-          <div class="zap-row"><span>File to delete</span><span>File ID from Step 11 (the temporary Google Doc)</span></div>
+          <div class="zap-row"><span>File to delete</span><span>File ID from Step 9 (the temporary Google Doc)</span></div>
         </div>
         <div class="callout info" style="margin-top:12px;"><div class="callout-icon">&#8505;&#65039;</div><p>The intermediate Google Doc created in Step 2 (in the "Automating Meeting Minutes" folder) may also accumulate over time. Consider adding a second delete step for that file ID if Drive storage becomes a concern.</p></div>
       </div>
@@ -671,17 +615,4 @@ As a reminder, any transcript recording from your internal meetings can be autom
         <tr><td style="font-family:monospace;font-size:12px;">SharePoint → Business Management → Meeting Note Bot</td><td>Where completed meeting notes Word documents are stored permanently after processing.</td></tr>
         <tr style="background:var(--bg);"><td style="font-family:monospace;font-size:12px;">SharePoint → Business Management → Meeting Note Bot → Perigon Weekly Action List.xlsx</td><td>The running action tracker. All named actions from every meeting are logged here automatically by the Zap.</td></tr>
         <tr><td style="font-family:monospace;font-size:12px;">Google Drive → Meeting Minutes (Workhorse Folder) → Meeting Minutes Template</td><td>The Google Docs template used in Step 10. Do not delete or rename. The merge fields <code>{{attendees}}</code>, <code>{{ExecutiveSummary}}</code>, <code>{{MeetingNotes}}</code>, and <code>{{ActionPoints}}</code> must always be present.</td></tr>
-        <tr style="background:var(--bg);"><td style="font-family:monospace;font-size:12px;">Perigon Partners – Knowledge Source (for AI by Zapier)</td><td>Google Doc used by Step 8. Gives the AI context about Perigon staff, clients, and mission. Update if staff or client details change.</td></tr>
-      </tbody>
-    </table>
-    <div class="callout tip" style="margin-top:24px;"><div class="callout-icon">&#128161;</div><p>If the AI is consistently getting Perigon context wrong (staff roles, client names), the Knowledge Source document may need updating. Contact <strong>Sally Weatherly</strong> to review and amend it.</p></div>
-  </div>
-
-</div>
-
-<footer>
-  Perigon Partners &nbsp;·&nbsp; Meeting Note Bot SOP v3.0 &nbsp;·&nbsp; February 2026 &nbsp;·&nbsp; System owner: Sally Weatherly, Growth &amp; Operations Lead
-</footer>
-
-</body>
-</html>
+        <tr style="background:var(--bg);"><td style="font-family:monospace;
