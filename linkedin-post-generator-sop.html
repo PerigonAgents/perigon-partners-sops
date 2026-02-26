@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perigon Partners - LinkedIn Post Generator SOP</title>
+  <title>Perigon Partners - LinkedIn Post Generator SOP v2.0</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
     :root {
@@ -12,6 +12,7 @@
       --border:#e8eaed;--bg:#f7f8f9;
       --warn-bg:#FFF7ED;--warn-border:#FB923C;--warn-text:#9A3412;
       --info-bg:#EFF6FF;--info-border:#3B82F6;--info-text:#1E40AF;
+      --new-bg:#F0FDF4;--new-border:#16A34A;--new-text:#14532D;
     }
     *{box-sizing:border-box;margin:0;padding:0;}
     body{font-family:'Montserrat',sans-serif;color:var(--body);line-height:1.7;background:#fff;}
@@ -22,6 +23,7 @@
     .cover-sub{font-size:16px;opacity:.8;margin-bottom:32px;}
     .cover-meta{display:flex;gap:32px;font-size:13px;opacity:.7;flex-wrap:wrap;}
     .cover-meta strong{display:block;font-weight:600;opacity:1;margin-bottom:2px;}
+    .version-badge{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;padding:3px 12px;margin-bottom:20px;text-transform:uppercase;}
     .content{max-width:860px;margin:0 auto;padding:48px 64px 80px;}
     .toc{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin-bottom:48px;}
     .toc h2{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
@@ -47,12 +49,14 @@
     .callout.info p{color:var(--info-text);margin:0;}
     .callout.tip{background:var(--green-pale);border-left:4px solid var(--green);}
     .callout.tip p{color:#1B4332;margin:0;}
+    .callout.new{background:var(--new-bg);border-left:4px solid var(--new-border);}
+    .callout.new p{color:var(--new-text);margin:0;}
     .flow{display:flex;align-items:stretch;flex-wrap:wrap;margin:24px 0 32px;}
-    .flow-step{flex:1;min-width:130px;background:var(--green-pale);border:1px solid var(--green-light);border-radius:8px;padding:16px 14px;text-align:center;}
+    .flow-step{flex:1;min-width:110px;background:var(--green-pale);border:1px solid var(--green-light);border-radius:8px;padding:16px 12px;text-align:center;}
     .flow-num{display:inline-block;background:var(--green);color:white;border-radius:50%;width:22px;height:22px;font-size:11px;font-weight:700;line-height:22px;margin-bottom:8px;}
-    .flow-label{font-size:12px;font-weight:600;color:#1B4332;line-height:1.4;}
-    .flow-tool{font-size:11px;color:var(--green);margin-top:4px;font-weight:500;}
-    .flow-arrow{display:flex;align-items:center;padding:0 5px;color:var(--green-light);font-size:20px;flex-shrink:0;}
+    .flow-label{font-size:11px;font-weight:600;color:#1B4332;line-height:1.4;}
+    .flow-tool{font-size:10px;color:var(--green);margin-top:4px;font-weight:500;}
+    .flow-arrow{display:flex;align-items:center;padding:0 4px;color:var(--green-light);font-size:20px;flex-shrink:0;}
     .trouble-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:16px;}
     .trouble-problem{background:var(--dark);color:white;padding:14px 20px;font-size:14px;font-weight:600;}
     .trouble-body{padding:16px 20px;}
@@ -76,8 +80,8 @@
     .zap-row:last-child{border-bottom:none;}
     .zap-row span:first-child{color:var(--muted);font-weight:500;flex:0 0 44%;}
     .zap-row span:last-child{font-weight:600;color:var(--dark);flex:0 0 54%;}
-    .zap-prompt{background:#F0FDF4;border:1px solid var(--green-light);border-radius:8px;padding:14px 16px;font-size:13px;color:#1B4332;line-height:1.7;margin-top:12px;white-space:pre-wrap;word-wrap:break-word;}
-    .zap-prompt-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+    .zap-prompt{background:#F0FDF4;border:1px solid var(--green-light);border-radius:8px;padding:14px 16px;font-size:13px;color:#1B4332;line-height:1.7;margin-top:12px;white-space:pre-wrap;word-wrap:break-word;font-family:monospace;}
+    .zap-prompt-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);margin-bottom:8px;font-family:'Montserrat',sans-serif;}
     .post-type{border-radius:8px;padding:16px 20px;margin:12px 0;border:1px solid var(--border);}
     .post-type-header{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
     .post-type-badge{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:20px;color:white;white-space:nowrap;}
@@ -91,6 +95,12 @@
     th:first-child{border-radius:8px 0 0 0;} th:last-child{border-radius:0 8px 0 0;}
     td{padding:10px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
     code{background:var(--green-pale);color:#1a5c3a;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:12px;}
+    .sharepoint-path{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:13px;font-family:monospace;color:var(--dark);margin:12px 0;letter-spacing:0.3px;}
+    .sharepoint-path span{color:var(--green);font-weight:600;}
+    .change-banner{background:linear-gradient(135deg,#1d3657,#2cac6c);color:white;border-radius:10px;padding:20px 24px;margin-bottom:32px;}
+    .change-banner h3{color:white;margin:0 0 10px;font-size:15px;}
+    .change-banner ul{margin:0;padding-left:18px;font-size:13px;opacity:0.9;}
+    .change-banner li{margin-bottom:4px;}
     footer{text-align:center;padding:32px 64px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
     @media(max-width:700px){
       .content{padding:24px 20px 48px;} .cover{padding:36px 24px 32px;}
@@ -107,11 +117,12 @@
     <a href="index.html" style="font-size:13px;color:rgba(255,255,255,0.7);text-decoration:none;font-weight:500;">&#8592; All SOPs</a>
   </div>
   <div class="cover-label">Standard Operating Procedure</div>
+  <div class="version-badge">Version 2.0 &mdash; Updated February 2026</div>
   <h1>LinkedIn Post<br>Generator</h1>
-  <div class="cover-sub">How the Perigon Partners LinkedIn content automation works</div>
+  <div class="cover-sub">How Emma creates LinkedIn content from a recorded Teams meeting</div>
   <div class="cover-meta">
     <div><strong>Organisation</strong>Perigon Partners</div>
-    <div><strong>Version</strong>1.2</div>
+    <div><strong>Version</strong>2.0</div>
     <div><strong>Last updated</strong>February 2026</div>
     <div><strong>System owner</strong>Sally Weatherly, Growth &amp; Operations Lead</div>
   </div>
@@ -119,14 +130,26 @@
 
 <div class="content">
 
+  <!-- What's changed banner -->
+  <div class="change-banner">
+    <h3>&#9889; What's changed in Version 2.0</h3>
+    <ul>
+      <li><strong>New trigger:</strong> SharePoint replaces Google Drive. Emma drops transcripts directly into a SharePoint folder — no Meeting Note Bot dependency.</li>
+      <li><strong>New input source:</strong> Emma records a Teams meeting with herself and drops the .docx transcript. No meeting required with anyone else.</li>
+      <li><strong>Simpler AI pipeline:</strong> The two-stage AI refocusing step is gone. Step 4 now generates posts directly from the raw transcript with a substantially improved prompt.</li>
+      <li><strong>Auto-cleanup:</strong> Steps 6 &amp; 7 automatically find and delete the temporary Google Doc after the posts are sent, keeping Drive tidy.</li>
+      <li><strong>Streamlined knowledge base:</strong> Step 4 now uses two highly focused knowledge base files instead of five, producing stronger, more consistent output.</li>
+    </ul>
+  </div>
+
   <div class="toc">
     <h2>Contents</h2>
     <ol>
       <li><a href="#overview">Overview &amp; How it works</a></li>
       <li><a href="#howto">Step-by-step guide</a>
         <ol class="sub">
-          <li><a href="#step-record">Record the Teams meeting</a></li>
-          <li><a href="#step-upload">Upload the transcript</a></li>
+          <li><a href="#step-record">Record your Teams meeting</a></li>
+          <li><a href="#step-upload">Drop the transcript into SharePoint</a></li>
           <li><a href="#step-output">What Emma receives</a></li>
           <li><a href="#step-review">Reviewing and posting</a></li>
         </ol>
@@ -142,52 +165,40 @@
   <div class="section" id="overview">
     <div class="section-label">Section 01</div>
     <h2 class="section-title">Overview &amp; How it works</h2>
-    <p>The Perigon LinkedIn Post Generator automatically produces three LinkedIn posts for Emma — one per post type — triggered by any recorded Teams meeting that passes through the Meeting Note Bot. <strong>There is no separate content capture step and no manual input required.</strong> The same transcript that produces meeting notes also generates LinkedIn posts, with nothing additional needed from the team.</p>
+    <p>The Perigon LinkedIn Post Generator produces three LinkedIn posts for Emma — one per post type — from a single Teams recording. <strong>Emma records a brief meeting with herself, downloads the .docx transcript, drops it into a SharePoint folder, and the automation handles everything else.</strong> No other input is needed. Posts arrive in her inbox within roughly 10 minutes.</p>
+    <p>Version 2.0 is a standalone pipeline — it no longer depends on the Meeting Note Bot. Emma can trigger it any time she wants fresh content, independently of any other meeting or workflow.</p>
 
     <div class="flow">
-      <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">Find new Google Doc transcript in Meeting Minutes folder</div><div class="flow-tool">Google Drive</div></div>
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">SharePoint detects new .docx transcript</div><div class="flow-tool">Microsoft SharePoint</div></div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">Extract full text from transcript Google Doc</div><div class="flow-tool">Google Docs</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">Converts transcript to Google Doc</div><div class="flow-tool">Google Drive</div></div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Refocus meeting notes for LinkedIn across 5 sections</div><div class="flow-tool">AI by Zapier · GPT-5.2</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">Pulls readable text from Google Doc</div><div class="flow-tool">Google Docs</div></div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Generate 3 LinkedIn posts in Emma's voice</div><div class="flow-tool">AI by Zapier · GPT-5.2</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">Generates LinkedIn posts in Emma's voice</div><div class="flow-tool">AI by Zapier</div></div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step"><div class="flow-num">5</div><div class="flow-label">Send HTML email to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f7929a9a96b78792859e9098998796858399928584d99498d9829c">[email&#160;protected]</a></div><div class="flow-tool">Outlook · agents@</div></div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-label">Sends email to Emma</div><div class="flow-tool">Microsoft Outlook</div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-num">6&amp;7</div><div class="flow-label">Finds and deletes temporary Google Doc</div><div class="flow-tool">Google Drive &amp; Docs</div></div>
     </div>
 
-    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p><strong>This runs on every recorded meeting</strong> — not just the weekly team meeting. Any transcript processed by the Meeting Note Bot will also trigger the LinkedIn Generator automatically. Client meetings, strategy sessions, and internal discussions can all produce LinkedIn content.</p></div>
+    <h3>How the AI step works</h3>
+    <p>Version 2.0 uses a single AI step rather than two in sequence. Step 4 reads the raw transcript text directly and generates all three posts in one pass, guided by the Voice DNA document and the Perigon Partners knowledge base. The prompt includes the full post type instructions, writing rules, quality checks, and the voice guide reference — everything the AI needs is built into the prompt itself, rather than split across two steps.</p>
 
-    <h3>The two AI layers explained</h3>
-    <p>The automation uses two AI steps in sequence. Running them separately produces significantly stronger output than asking a single step to jump from raw transcript to finished LinkedIn posts in one go.</p>
-    <table>
-      <thead><tr><th style="width:22%;">Step</th><th style="width:42%;">What it does</th><th>Why it matters</th></tr></thead>
-      <tbody>
-        <tr style="background:var(--bg);">
-          <td style="font-weight:600;">Step 3<br>Refocusing meeting notes for LinkedIn</td>
-          <td>Reads the raw transcript and extracts the most strategically useful material across 5 sections: Client World, The Outside World, Team Brain, Inside Perigon, and Recurring Conversations. Selects 2–3 focused insights rather than summarising everything.</td>
-          <td>Filters noise. Sections 3 (Team Brain) and 5 (Recurring Conversations) are weighted most heavily — these contain the most distinct, human insights.</td>
-        </tr>
-        <tr>
-          <td style="font-weight:600;">Step 4<br>Generate 3 posts for Emma</td>
-          <td>Takes the structured Step 3 output and generates three LinkedIn posts — one per post type — in Emma's voice, guided by the full knowledge base.</td>
-          <td>Works from focused, curated material. This is what produces specific, Emma-sounding posts rather than generic LinkedIn content.</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="callout tip"><div class="callout-icon">&#128161;</div><p><strong>The quality of the posts reflects the quality of the recording.</strong> When Emma talks through real client challenges, strategic tensions, or opinions she's been forming, the AI has strong material to work with. When the recording is brief or mostly administrative, the posts will reflect that. The richest recordings produce the best posts.</p></div>
 
     <h3>What Emma receives</h3>
-    <p>An HTML-formatted email sent from <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="26474143485255665643544f414948564754524843545508454908534d">[email&#160;protected]</a></strong> directly to <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afcac2c2ceefdfcaddc6c8c0c1dfcedddbc1cadddc81ccc081dac4">[email&#160;protected]</a></strong>. The email body contains three complete LinkedIn posts — one Thought Leadership, one Trust Building, one CTA — ready for Emma to review and personalise before posting.</p>
+    <p>An email sent from <strong>agents@perigonpartners.co.uk</strong> directly to <strong>emma@perigonpartners.co.uk</strong>. The email body contains three complete LinkedIn posts in plain text — one Thought Leadership, one Trust Building, one CTA — ready for Emma to review and personalise before posting.</p>
 
-    <div class="callout tip"><div class="callout-icon">&#128161;</div><p><strong>These are drafts, not finished posts.</strong> Emma should review each post, add any personal context or current detail, and write in her own voice before posting to LinkedIn. The automation produces a strong, specific first draft — it does not replace Emma's voice.</p></div>
+    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p><strong>Output is plain text, not HTML.</strong> Unlike v1, the posts arrive as clean plain text — easier to read, copy, and edit directly. No formatting to strip out before posting to LinkedIn.</p></div>
 
     <h3>Processing timeline</h3>
     <div class="timeline">
-      <div class="timeline-item"><div class="time">0 min</div><p>Meeting transcript .docx is uploaded to the Meeting Note Bot trigger folder (as per Meeting Note Bot SOP)</p></div>
-      <div class="timeline-item"><div class="time">~1–4 min</div><p>Meeting Note Bot runs: transcript converted, meeting notes written, branded Google Doc created and emailed to agents@ inbox</p></div>
-      <div class="timeline-item"><div class="time">~4–6 min</div><p>LinkedIn Generator Step 3 runs: transcript text analysed and refocused across 5 sections</p></div>
-      <div class="timeline-item"><div class="time">~6–9 min</div><p>LinkedIn Generator Step 4 runs: three posts generated in Emma's voice</p></div>
-      <div class="timeline-item"><div class="time">~10 min</div><p>HTML email with three posts arrives in <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="11747c7c705161746378767e7f617063657f7463623f727e3f647a">[email&#160;protected]</a> inbox</p></div>
+      <div class="timeline-item"><div class="time">0 min</div><p>Emma drops the .docx transcript into the SharePoint folder</p></div>
+      <div class="timeline-item"><div class="time">~1–2 min</div><p>SharePoint trigger fires; Google Drive converts the file to a Google Doc</p></div>
+      <div class="timeline-item"><div class="time">~3–5 min</div><p>Google Docs extracts readable text; AI step generates three posts</p></div>
+      <div class="timeline-item"><div class="time">~6–8 min</div><p>Email sent to emma@perigonpartners.co.uk; temporary Google Doc deleted</p></div>
+      <div class="timeline-item"><div class="time">~10 min</div><p>Posts arrive in Emma's inbox, ready to review</p></div>
     </div>
   </div>
 
@@ -197,34 +208,54 @@
     <h2 class="section-title">Step-by-step guide</h2>
 
     <h3 id="step-record">Step 1 — Record your Teams meeting</h3>
-    <p>Follow the same recording process described in the Meeting Note Bot SOP. No additional preparation is needed for the LinkedIn Generator — it runs automatically from the same transcript.</p>
-    <div class="callout tip"><div class="callout-icon">&#128161;</div><p>Meetings where the team discusses client challenges, market observations, or where someone says something that makes the room pause tend to produce the strongest LinkedIn content. The richer the discussion, the better the posts.</p></div>
+    <p>Open Microsoft Teams and start a new meeting with yourself. This doesn't require anyone else in the call. The purpose is to record Emma speaking naturally about her current work — client challenges, strategic thinking, wins, observations, things she keeps coming back to. The more specific and honest the recording, the better the posts.</p>
 
-    <h3 id="step-upload">Step 2 — Upload the transcript to Google Drive</h3>
-    <p>Follow the upload process described in the Meeting Note Bot SOP. Uploading the .docx transcript to the trigger folder (<em>My Drive &#8594; Meeting Notes &#8594; Upload Meeting Transcripts HERE</em>) triggers both pipelines simultaneously. No separate upload or action is needed for the LinkedIn Generator.</p>
-    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>The LinkedIn Generator depends on the same trigger as the Meeting Note Bot. If the Meeting Note Bot is not running, neither will the LinkedIn Generator. Check the Meeting Note Bot SOP troubleshooting section first if nothing is received.</p></div>
+    <div class="callout tip"><div class="callout-icon">&#128161;</div><p>There's no required structure or format. Talk about one client situation, a market observation that's been nagging at you, something the team said that stuck, or a question you keep getting asked. Aim for 5–15 minutes of substance. The AI is better at finding the post than you are at predicting what will land — just talk.</p></div>
+
+    <ol class="steps">
+      <li><strong>Start recording and enable transcription</strong> In the Teams meeting controls, click the three-dot menu (&#8943;) and select <em>Start recording</em>. Confirm that transcription is also enabled — you need the transcript file, not just the video.<span class="note">Teams will show a notification that the meeting is being recorded and transcribed.</span></li>
+      <li><strong>Talk through your content</strong> Speak naturally. Cover current client situations (anonymised), market or regulatory observations, team thinking, recurring questions you're answering, or anything forming in your strategic view right now.</li>
+      <li><strong>Stop recording and end the meeting</strong> Click <em>Stop recording</em> before ending the call. Teams will process the recording and make the transcript available in the meeting recap — this usually takes 2–5 minutes.</li>
+    </ol>
+
+    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p><strong>Never use full client names in the recording.</strong> The transcript passes through external AI systems. Always refer to clients by sector, size, or situation only — e.g. "a mid-size financial services firm" rather than a name or identifiable description.</p></div>
+
+    <h3 id="step-upload">Step 2 — Drop the transcript into SharePoint</h3>
+    <p>Once Teams has processed the recording, download the transcript as a <strong>.docx file</strong> from the meeting recap. Then drag it into the designated SharePoint folder. This single action triggers the entire automation.</p>
+
+    <p><strong>SharePoint drop folder:</strong></p>
+    <div class="sharepoint-path">Business Management &rsaquo; Processes &rsaquo; Tools &rsaquo; <span>LinkedIn Ideas Generator</span> &rsaquo; <span>Emma drop transcripts here</span></div>
+
+    <ol class="steps">
+      <li><strong>Open the Teams meeting recap</strong> Go to your Teams calendar and open the meeting. The recap tab will show the recording and transcript once processing is complete.</li>
+      <li><strong>Download the transcript as .docx</strong> In the transcript panel, click the download icon and select <em>Download as .docx</em>. Do not download as .vtt — the automation requires .docx format.<span class="note">The file will be named something like "Meeting with Emma Walford — transcript.docx"</span></li>
+      <li><strong>Drag the file into the SharePoint folder</strong> Navigate to the SharePoint drop folder above and drag the .docx file in. The automation fires within 2 minutes of the file appearing.</li>
+    </ol>
+
+    <div class="callout new"><div class="callout-icon">&#10024;</div><p><strong>That's the only manual step.</strong> Everything from here — Google Doc conversion, text extraction, AI generation, email delivery, and clean-up — happens automatically. There's nothing else to do.</p></div>
 
     <h3 id="step-output">Step 3 — Emma receives the posts by email</h3>
     <ol class="steps">
-      <li><strong>Wait approximately 10 minutes</strong> The full pipeline — transcript processing, meeting notes, LinkedIn analysis, post generation — takes around 10 minutes end to end.</li>
-      <li><strong>Check <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ffaf2f2fedfeffaedf6f8f0f1effeedebf1faedecb1fcf0b1eaf4">[email&#160;protected]</a></strong> The three posts are sent directly to Emma's inbox from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcbdbbb9b2a8af9cacb9aeb5bbb3b2acbdaea8b2b9aeaff2bfb3f2a9b7">[email&#160;protected]</a>. The meeting notes PDF arrives separately in the agents@ inbox as usual.<span class="note">If the email lands in spam, mark it as safe to prevent this on future runs.</span></li>
-      <li><strong>Read all three posts in full</strong> Each is formatted in HTML and covers one post type: Thought Leadership, Trust Building, and CTA.</li>
+      <li><strong>Wait approximately 10 minutes</strong> The full pipeline takes around 8–10 minutes from the moment the file lands in SharePoint to the email arriving in Emma's inbox.</li>
+      <li><strong>Check emma@perigonpartners.co.uk</strong> The three posts are sent directly to Emma's inbox from agents@perigonpartners.co.uk. Subject line will reference the LinkedIn Generator.<span class="note">If the email lands in junk, mark agents@ as a safe sender to prevent this on future runs.</span></li>
+      <li><strong>Read all three posts in full</strong> Each post covers one type: Thought Leadership, Trust Building, and CTA. They arrive as plain text, making them easy to copy directly into LinkedIn or a notes app.</li>
     </ol>
 
     <h3 id="step-review">Step 4 — Emma reviews, personalises, and posts</h3>
     <ol class="steps">
-      <li><strong>Read each post and identify which feels most natural to post this week</strong> The AI anchors each post to a specific insight from the meeting — if one feels off, the source material from that meeting may have been thin in that area.</li>
-      <li><strong>Personalise the post</strong> Add current context, a personal observation, or a specific detail that only Emma would include. This is what makes the post feel like Emma rather than a generator.</li>
-      <li><strong>Post or schedule to LinkedIn</strong> Recommended cadence: three posts per week, one of each type. Monday (Thought Leadership) · Wednesday (Trust Building) · Friday (CTA).</li>
+      <li><strong>Read each post and identify which feels truest to the recording</strong> The AI anchors posts to specific content from the transcript. If a post feels generic, the relevant section of the recording was probably thin. Use that as a guide for what to include next time.</li>
+      <li><strong>Personalise before posting</strong> Add a current detail, a specific observation, or a line that only Emma would write. This is the most important step — it's what makes the post feel like Emma rather than a generator.</li>
+      <li><strong>Post or schedule to LinkedIn</strong> Recommended cadence: three posts per week, one of each type. Monday (Thought Leadership) &middot; Wednesday (Trust Building) &middot; Friday (CTA).</li>
     </ol>
-    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p>The AI output should never be posted to LinkedIn without Emma's review and personalisation. The posts are strong first drafts — the finished post should always feel like it came from Emma.</p></div>
+
+    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>AI output should never be posted to LinkedIn without Emma's review and personalisation. The posts are strong, specific first drafts — the finished post should always feel like it came from Emma.</p></div>
   </div>
 
   <!-- SECTION 03 -->
   <div class="section" id="posttypes">
     <div class="section-label">Section 03</div>
     <h2 class="section-title">The three post types</h2>
-    <p>The automation generates exactly one post per type on every run. Together across the week they build both reach and relationship with Emma's ideal client audience.</p>
+    <p>The automation generates exactly one post per type on every run. Together across the week they build both reach and relationship with Emma's ideal client audience — CEOs and C-Suite of financial, infrastructure, and services businesses with 100–2,000 employees.</p>
 
     <div class="post-type">
       <div class="post-type-header">
@@ -234,7 +265,7 @@
       <p><strong>Goal:</strong> Reach and awareness. Position Emma as the most relevant expert voice for her ICP. The reader should finish thinking "she understands my world."</p>
       <p><strong>Tone:</strong> Expert, opinionated, generous with insight. Never hedged or vague.</p>
       <p><strong>Examples:</strong> "I attended this event — here are my three takeaways"; "New regulation has just been introduced — here's what it means for a 200-person financial services firm"; "How to navigate [challenge] without losing strategic coherence."</p>
-      <p><strong>CTA style:</strong> A genuine question Emma wants answered — specific to the post topic, not a generic "what do you think?"</p>
+      <p><strong>What to avoid:</strong> Generic observations that could come from anyone. Staccato sentence fragments used as a stylistic substitute for an actual argument. Announcing a point of view rather than earning it.</p>
     </div>
 
     <div class="post-type">
@@ -245,7 +276,7 @@
       <p><strong>Goal:</strong> Deepen relationship with the existing audience. Make followers feel they know Emma and how Perigon thinks. The reader should finish thinking "I feel like I know her."</p>
       <p><strong>Tone:</strong> Personal, honest, specific. Vulnerable where appropriate. Never vague or motivational.</p>
       <p><strong>Examples:</strong> A client situation (anonymised) that shows how Perigon thinks; a moment of self-doubt or growth; an internal team win described with warmth and honesty.</p>
-      <p><strong>CTA style:</strong> Soft — a reflective question or "I'd love to hear your experience." No commercial message in this post type.</p>
+      <p><strong>What to avoid:</strong> Posts centred on identity rather than insight — motherhood, womanhood, or work-life balance as the primary frame. Vague reflections that could have been written by anyone.</p>
     </div>
 
     <div class="post-type">
@@ -256,38 +287,40 @@
       <p><strong>Goal:</strong> Move warm audience members toward a next step with Perigon — a tool, diagnostic, conversation, or service. The reader should finish thinking "that's actually useful — I might take her up on that."</p>
       <p><strong>Tone:</strong> Value-led. Never pushy. Lead with a genuine insight, end with a low-friction invitation.</p>
       <p><strong>Examples:</strong> "Try our new ESG compliance tool"; "Let me know how Perigon Partners can help you in this situation"; "Behind on AI strategy? We've built a short diagnostic — happy to share it."</p>
-      <p><strong>CTA style:</strong> Direct but low friction. DM / tool / conversation. Never "let's chat" or "reach out to find out more."</p>
+      <p><strong>What to avoid:</strong> "Let's chat" or "reach out to find out more." Corporate language. Any CTA that feels like a brochure rather than a conversation.</p>
     </div>
+
+    <h3>Writing rules applied to every post</h3>
+    <p>The AI prompt enforces these rules automatically. Emma should check for them during review:</p>
+    <table>
+      <thead><tr><th style="width:30%;">Rule</th><th>What it means in practice</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">150–200 words per post</td><td>Long enough to make a real argument, short enough to hold attention. Posts outside this range should be trimmed or expanded before posting.</td></tr>
+        <tr><td style="font-weight:600;">No em dashes</td><td>The AI is instructed never to use em dashes (—). If any appear, remove them and replace with a full stop, comma, or restructured sentence.</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">One exclamation mark maximum</td><td>Earned, not reflexive. If there's no genuine moment of emphasis, the exclamation mark goes.</td></tr>
+        <tr><td style="font-weight:600;">Contractions throughout</td><td>"Don't," "isn't," "you'll." These keep the writing human. If a post reads as formal or stiff, contractions are usually the fix.</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">British English</td><td>Realise, organisation, centre, behaviour. The AI is instructed to use British spellings throughout.</td></tr>
+        <tr><td style="font-weight:600;">Plain text output</td><td>Posts are delivered as clean plain text with no HTML formatting, making them easy to copy directly into LinkedIn.</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- SECTION 04 -->
   <div class="section" id="troubleshoot">
     <div class="section-label">Section 04</div>
     <h2 class="section-title">Troubleshooting</h2>
-    <p>Check the Meeting Note Bot SOP first if the meeting notes did not arrive — the LinkedIn Generator runs on the same pipeline.</p>
 
     <div class="trouble-item">
-      <div class="trouble-problem">Emma received the meeting notes but not the LinkedIn posts</div>
+      <div class="trouble-problem">Nothing arrived — no email, no posts</div>
       <div class="trouble-body">
         <div class="trouble-label">Likely cause</div>
-        <p>Steps 3, 4, or 5 of the LinkedIn Generator Zap errored after the Meeting Note Bot completed successfully.</p>
+        <p>The SharePoint trigger didn't fire, usually because the file wasn't placed in the correct folder or was saved in the wrong format.</p>
         <div class="trouble-label">Steps to resolve</div>
         <ul>
-          <li>Wait a full 15 minutes — Step 4 (post generation) can occasionally be slow.</li>
-          <li>Check <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="98fdf5f5f9d8e8fdeaf1fff7f6e8f9eaecf6fdeaebb6fbf7b6edf3">[email&#160;protected]</a> spam/junk folder — HTML-formatted emails occasionally trigger spam filters.</li>
-          <li>Ask Sally to check the Zapier run history for errors on Steps 3, 4, or 5 of the "Emma LinkedIn Idea Generator" Zap.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="trouble-item">
-      <div class="trouble-problem">Neither the meeting notes nor the LinkedIn posts arrived</div>
-      <div class="trouble-body">
-        <div class="trouble-label">Likely cause</div>
-        <p>The trigger did not fire — likely a file placement or file type issue at Step 1.</p>
-        <div class="trouble-label">Steps to resolve</div>
-        <ul>
-          <li>Refer to the <strong>Meeting Note Bot SOP troubleshooting section</strong> and resolve that first. Both automations share the same trigger — if the trigger is broken, neither will run.</li>
+          <li>Confirm the file is a <strong>.docx</strong> — not .vtt, .pdf, or .mp4. The automation only triggers on .docx files.</li>
+          <li>Confirm the file was placed in exactly the right folder: <em>Business Management &rsaquo; Processes &rsaquo; Tools &rsaquo; LinkedIn Ideas Generator &rsaquo; Emma drop transcripts here</em>. Subfolders or the parent folder will not trigger the Zap.</li>
+          <li>Wait 5 minutes and check again — SharePoint polling has a ~2 minute delay.</li>
+          <li>If still nothing, ask Sally to check the Zapier run history for the "Emma LinkedIn Idea Generator" Zap.</li>
         </ul>
       </div>
     </div>
@@ -296,58 +329,74 @@
       <div class="trouble-problem">The posts arrived but don't sound like Emma — they're generic</div>
       <div class="trouble-body">
         <div class="trouble-label">Likely cause</div>
-        <p>The meeting contained limited strategic or client-facing discussion, leaving Step 3 with thin material to work from. Short or operational-only meetings will always produce weaker post ideas.</p>
+        <p>The recording contained limited strategic or opinion-led content. If most of the transcript was operational, logistical, or brief, the AI had thin material to work from and will produce thin output.</p>
         <div class="trouble-label">Steps to resolve</div>
         <ul>
-          <li>This is expected for certain meeting types — not every meeting will produce equally strong posts.</li>
-          <li>If substantive meetings are consistently producing generic output, the knowledge base files in Zapier may be out of date. Ask Sally to review the Emma Walford Voice Guide and Top Posts reference in the Step 4 knowledge sources.</li>
+          <li>This is expected for certain recording types. Not every session will produce equally strong posts — that's normal.</li>
+          <li>For stronger posts next time: include specific client situations (anonymised), contrarian opinions, recurring questions you keep being asked, or market observations that have genuinely struck you.</li>
+          <li>If substantive recordings are consistently producing generic output, the Voice DNA document in the Step 4 knowledge base may need refreshing. Flag to Sally.</li>
         </ul>
       </div>
     </div>
 
     <div class="trouble-item">
-      <div class="trouble-problem">The posts reference incorrect details about Perigon, a client, or a service</div>
+      <div class="trouble-problem">The posts reference incorrect details about Perigon, a service, or a client situation</div>
       <div class="trouble-body">
         <div class="trouble-label">Likely cause</div>
-        <p>The Perigon Partners Knowledge Source document is out of date, or the meeting transcript contained an ambiguous reference the AI misread.</p>
+        <p>The Perigon Partners knowledge base file in Zapier is out of date, or the transcript contained an ambiguous reference the AI misread.</p>
         <div class="trouble-label">Steps to resolve</div>
         <ul>
-          <li>Check whether the incorrect detail relates to something in the Perigon Partners Knowledge Source — if so, flag to Sally to update it.</li>
-          <li>Do not include sensitive or full client names in meeting discussions that are being recorded — the AI should work from anonymised descriptions only.</li>
+          <li>Check whether the incorrect detail relates to Perigon's services, team, or positioning — if so, flag to Sally to update the knowledge base file.</li>
+          <li>Do not use full client names or identifying details in recordings. The AI works best with anonymised descriptions: "a financial services firm with around 300 staff" rather than any name.</li>
         </ul>
       </div>
     </div>
 
     <div class="trouble-item">
-      <div class="trouble-problem">Fewer than three posts were generated</div>
+      <div class="trouble-problem">Fewer than three posts were generated, or one post type is missing</div>
       <div class="trouble-body">
         <div class="trouble-label">Likely cause</div>
-        <p>The AI hit an output token limit, or the transcript lacked enough varied content for all three post types.</p>
+        <p>The AI reached an output token limit, or the transcript lacked enough varied content for the AI to differentiate across all three post types.</p>
         <div class="trouble-label">Steps to resolve</div>
         <ul>
-          <li>Read the email carefully — all three posts may be present but one may be significantly shorter than the others.</li>
-          <li>If a post type is consistently missing, Sally should check the output token limit setting in the Step 4 Zapier configuration.</li>
+          <li>Read the email carefully — all three posts may be present but one may be significantly shorter than expected.</li>
+          <li>If a post type is consistently absent across multiple runs, ask Sally to check the output token limit in the Step 4 Zapier configuration.</li>
         </ul>
       </div>
     </div>
 
-    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p>For issues not covered here, contact <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead). Include the meeting name, date, and a description of what was and was not received.</p></div>
+    <div class="trouble-item">
+      <div class="trouble-problem">The email arrived in junk or spam</div>
+      <div class="trouble-body">
+        <div class="trouble-label">Likely cause</div>
+        <p>Outlook occasionally flags automated emails from agents@ as spam, particularly on first use.</p>
+        <div class="trouble-label">Steps to resolve</div>
+        <ul>
+          <li>Mark agents@perigonpartners.co.uk as a safe sender in Outlook settings. This prevents it happening on future runs.</li>
+          <li>Check the junk folder as a first step before assuming the automation didn't run.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout info"><div class="callout-icon">&#8505;&#65039;</div><p>For issues not covered here, contact <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead). Include the date of the recording, the filename dropped into SharePoint, and a description of what was and wasn't received.</p></div>
   </div>
 
   <!-- SECTION 05 -->
   <div class="section" id="quickref">
     <div class="section-label">Section 05</div>
     <h2 class="section-title">Quick reference checklist</h2>
-    <p>The LinkedIn Generator runs fully automatically — no additional steps are needed beyond the normal Meeting Note Bot process.</p>
+    <p>Emma's end-to-end process from recording to posting — everything after Step 2 is fully automated.</p>
     <table>
-      <thead><tr><th>Step</th><th>Action</th><th>Common mistake to avoid</th></tr></thead>
+      <thead><tr><th style="width:8%;">Step</th><th style="width:46%;">Action</th><th>Common mistake to avoid</th></tr></thead>
       <tbody>
-        <tr style="background:var(--bg);"><td style="font-weight:600;">1</td><td>Record the Teams meeting with transcription enabled</td><td>Forgetting to start recording — no transcript means no posts</td></tr>
-        <tr><td style="font-weight:600;">2</td><td>Download transcript as <strong>.docx</strong> from Teams recap</td><td>Downloading as .vtt — the pipeline requires .docx</td></tr>
-        <tr style="background:var(--bg);"><td style="font-weight:600;">3</td><td>Upload to: <em>My Drive &#8594; Meeting Notes &#8594; Upload Meeting Transcripts HERE</em></td><td>This is the same step as the Meeting Note Bot — no separate upload needed for LinkedIn</td></tr>
-        <tr><td style="font-weight:600;">4</td><td>Wait ~10 minutes, then check <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f99c949498b9899c8b909e969789988b8d979c8b8ad79a96d78c92">[email&#160;protected]</a></strong></td><td>Checking agents@ — the LinkedIn posts go directly to Emma, not to agents@</td></tr>
-        <tr style="background:var(--bg);"><td style="font-weight:600;">5</td><td>Emma reviews all three posts and selects what to develop this week</td><td>Using only the first post — all three types should be considered each week</td></tr>
-        <tr><td style="font-weight:600;">6</td><td>Emma personalises each post with her own voice before posting to LinkedIn</td><td>Posting AI output directly without personalisation — always the most important step</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">1</td><td>Start a Teams meeting with yourself and enable recording + transcription</td><td>Starting recording without enabling transcription — you need the .docx transcript, not just the video</td></tr>
+        <tr><td style="font-weight:600;">2</td><td>Talk through client challenges, strategic thinking, recurring observations — speak naturally for 5–15 minutes</td><td>Keeping it too brief or too operational — the quality of the posts mirrors the quality of the recording</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">3</td><td>Stop recording, end the meeting, wait 2–5 minutes for Teams to process the transcript</td><td>Trying to download the transcript before Teams has finished processing it</td></tr>
+        <tr><td style="font-weight:600;">4</td><td>Download transcript as <strong>.docx</strong> from the Teams meeting recap</td><td>Downloading as .vtt — the automation requires .docx format</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">5</td><td>Drop the .docx into: <em>Business Management &rsaquo; Processes &rsaquo; Tools &rsaquo; LinkedIn Ideas Generator &rsaquo; Emma drop transcripts here</em></td><td>Placing the file in the parent folder or a subfolder — it must go in exactly the right location</td></tr>
+        <tr><td style="font-weight:600;">6</td><td>Wait ~10 minutes, then check <strong>emma@perigonpartners.co.uk</strong></td><td>Checking agents@ — the LinkedIn posts go directly to Emma's inbox, not to agents@</td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">7</td><td>Read all three posts and identify which to develop this week</td><td>Only reading the first post — all three types should be considered each week</td></tr>
+        <tr><td style="font-weight:600;">8</td><td>Personalise each post with Emma's own voice and current context before posting</td><td>Posting AI output directly without personalisation — always the most important step</td></tr>
       </tbody>
     </table>
   </div>
@@ -356,154 +405,162 @@
   <div class="section" id="zapier">
     <div class="section-label">Section 06</div>
     <h2 class="section-title">Zapier technical reference</h2>
-    <p>The LinkedIn Generator is a separate Zap named <strong>"Emma LinkedIn Idea Generator"</strong> in the Perigon workspace. It has 5 steps and runs automatically whenever a new meeting transcript Google Doc appears in the Meeting Minutes (Workhorse Folder) — triggered by output from the Meeting Note Bot pipeline.</p>
+    <p>The LinkedIn Generator is a Zap named <strong>"Emma LinkedIn Idea Generator"</strong> in the Perigon workspace. It has 7 steps and runs fully automatically when a .docx file is dropped into the designated SharePoint folder. It operates independently of the Meeting Note Bot — this is a standalone pipeline.</p>
 
-    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>Only <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead) should make changes to this Zap. If you think a prompt or setting needs updating, flag it to Sally rather than editing directly.</p></div>
+    <div class="callout warning"><div class="callout-icon">&#9888;&#65039;</div><p>Only <strong>Sally Weatherly</strong> (Growth &amp; Operations Lead) should make changes to this Zap. If you think a prompt, knowledge base file, or setting needs updating, flag it to Sally rather than editing directly.</p></div>
 
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">1</div><div><div class="zap-title">Find new google docs meeting transcript file</div><div class="zap-app">Trigger &nbsp;&#183;&nbsp; Google Drive &nbsp;&#183;&nbsp; polls every 2 minutes</div></div></div>
+      <div class="zap-header"><div class="zap-num">1</div><div><div class="zap-title">SharePoint Detects New File</div><div class="zap-app">Trigger &nbsp;&#183;&nbsp; Microsoft SharePoint &nbsp;&#183;&nbsp; polls every 2 minutes</div></div></div>
       <div class="zap-body">
-        <p>Watches the Meeting Minutes (Workhorse Folder) for new Google Doc files. Fires when the Meeting Note Bot has converted and saved a transcript — meaning the LinkedIn Generator always works from the same converted document, not the raw .docx upload.</p>
+        <p>Watches the designated SharePoint folder for new .docx files. When Emma drops a transcript in, this step fires and passes the file to Step 2 for conversion. The 2-minute polling interval means there can be up to a 2-minute delay from file drop to pipeline start.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>Folder monitored</span><span>Meeting Minutes (Workhorse Folder)</span></div>
-          <div class="zap-row"><span>Include subfolders?</span><span>False</span></div>
-          <div class="zap-row"><span>Include deleted files?</span><span>Only return non-deleted files</span></div>
-          <div class="zap-row"><span>Account</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="38595f5d564c4b78485d4a515f575648594a4c565d4a4b165b57164d53">[email&#160;protected]</a></span></div>
+          <div class="zap-row"><span>Folder monitored</span><span>Business Management &rsaquo; Processes &rsaquo; Tools &rsaquo; LinkedIn Ideas Generator &rsaquo; Emma drop transcripts here</span></div>
+          <div class="zap-row"><span>File type</span><span>.docx</span></div>
+          <div class="zap-row"><span>Polling interval</span><span>Every 2 minutes</span></div>
         </div>
-        <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>This trigger fires on the converted Google Doc created by the Meeting Note Bot — not on the .docx upload itself. There can be a 2–3 minute delay between the .docx upload and this step firing.</p></div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">2</div><div><div class="zap-title">Get Transcript Content</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Google Docs &nbsp;&#183;&nbsp; Get Document Content</div></div></div>
+      <div class="zap-header"><div class="zap-num">2</div><div><div class="zap-title">Converts Transcript to Google Doc</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Google Drive &nbsp;&#183;&nbsp; Upload File</div></div></div>
       <div class="zap-body">
-        <p>Reads the full plain-text content of the Google Doc identified in Step 1. This gives the AI in Step 3 a clean, readable version of the transcript to work from.</p>
+        <p>Takes the .docx file from SharePoint and uploads it to Google Drive, converting it to a Google Doc in the process. This temporary Google Doc is the version the AI reads from in Step 4. It is deleted automatically by Steps 6 and 7 once the email has been sent.</p>
+        <div class="zap-config">
+          <div class="zap-row"><span>App</span><span>Google Drive</span></div>
+          <div class="zap-row"><span>Action event</span><span>Upload File (convert to Google Doc)</span></div>
+          <div class="zap-row"><span>Source file</span><span>.docx from Step 1</span></div>
+          <div class="zap-row"><span>Convert to Google Doc</span><span>Yes</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zap-step">
+      <div class="zap-header"><div class="zap-num">3</div><div><div class="zap-title">Pulls Out Readable Text for AI</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Google Docs &nbsp;&#183;&nbsp; Get Document Content</div></div></div>
+      <div class="zap-body">
+        <p>Reads the full plain-text content of the Google Doc created in Step 2. This extracts clean, readable text from the transcript — stripping out any .docx formatting artefacts — and passes it to Step 4 as the AI's primary input.</p>
         <div class="zap-config">
           <div class="zap-row"><span>App</span><span>Google Docs</span></div>
           <div class="zap-row"><span>Action event</span><span>Get Document Content</span></div>
-          <div class="zap-row"><span>Account</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b2a2c2e253f380b3b2e39222c24253b2a393f252e3938652824653e20">[email&#160;protected]</a></span></div>
-          <div class="zap-row"><span>Document</span><span>Google Doc ID from Step 1</span></div>
+          <div class="zap-row"><span>Document</span><span>Google Doc ID from Step 2</span></div>
         </div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">3</div><div><div class="zap-title">Refocusing meeting notes for LinkedIn</div><div class="zap-app">Action &nbsp;&#183;&nbsp; AI by Zapier &nbsp;&#183;&nbsp; GPT-5.2 &nbsp;&#183;&nbsp; Authentication: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a697b7676635a6a7f68737d75746a7b686e747f6869347975346f71">[email&#160;protected]</a></div></div></div>
+      <div class="zap-header"><div class="zap-num">4</div><div><div class="zap-title">Generate LinkedIn Posts</div><div class="zap-app">Action &nbsp;&#183;&nbsp; AI by Zapier &nbsp;&#183;&nbsp; Custom prompt</div></div></div>
       <div class="zap-body">
-        <p>The first AI step. Reads the full transcript text from Step 2 and analyses it across five structured sections, selecting the 2–3 insights most useful for LinkedIn content. Sections 3 (Team Brain) and 5 (The Conversation We Keep Having) are explicitly weighted as the highest-value sources. The output of this step becomes the input for Step 4.</p>
+        <p>The core AI step. Reads the full transcript text from Step 3 and generates three complete LinkedIn posts in Emma's voice — one per post type — in a single pass. Two knowledge base files anchor the output to Emma's specific voice and Perigon's positioning. Output is plain text, delivered directly in the email body.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>Provider</span><span>OpenAI</span></div>
-          <div class="zap-row"><span>Model</span><span>GPT-5.2</span></div>
-          <div class="zap-row"><span>Authentication</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2c3e3333261f2f3a2d363830312f3e2d2b313a2d2c713c30712a34">[email&#160;protected]</a></span></div>
-          <div class="zap-row"><span>Input</span><span>Document text content from Step 2</span></div>
-          <div class="zap-row"><span>Knowledge source</span><span>Perigon Partners – Knowledge Source (for AI by Zapier)</span></div>
-        </div>
-        <div class="zap-prompt"><div class="zap-prompt-label">Prompt (verbatim)</div>I include the transcript of a recent Teams meeting within Perigon Partners, a business consultancy that helps Chairs and CEOs in the UK get aligned on the one strategy that matters—integrating growth, sustainability, and resilience into a plan the board trusts and the exec team can execute. Help me analyze the transcript by answering the following questions, organized by section:
-
-SECTION 1: Client World
-- What current developments with clients are interesting, instructive, or noteworthy for reflection?
-- What challenges or situations occurred with a client this week? (Please avoid naming them — simply describe the situation.)
-- What observations, advice, or thought processes did we offer?
-- Was there a moment where our viewpoint influenced the client's perspective, or did theirs shift ours?
-- Are there any client successes, breakthroughs, or challenging discussions we should highlight?
-
-SECTION 2: The Outside World
-- What market trends, regulatory updates, or news are pertinent that our Ideal Client Profile (ICP) should consider?
-- Were there any significant regulatory changes, policy developments, or industry shifts noted this week?
-- Is there relevant information about AI, technology, or sustainability that could impact our clients?
-- Did we encounter any notable articles, discussions, or events this week that provoked insights or reactions?
-- What key takeaways should a CEO of a financial, infrastructure, or services company consider?
-
-SECTION 3: Team Brain
-- What insights, opinions, or instinctive reactions emerged from the team this week concerning strategy and sustainability?
-- Was there a moment when someone made a statement that paused the conversation for reflection?
-- Did anyone express a strong opinion or a contrarian viewpoint this week?
-- Is there something the team is personally grappling with regarding strategy, sustainability, or the role of a CEO?
-- Were there any analogies, phrases, or frameworks shared that stood out as particularly insightful or useful?
-
-SECTION 4: Inside Perigon
-- What internal happenings are worth sharing in a genuine and appropriate manner?
-- Are there updates on the team, hiring, or significant business milestones?
-- Did we utilise or improve any tools, frameworks, or methodologies this week?
-- Was there a moment of vulnerability, challenge, or growth that could provide valuable context?
-- Is there any aspect of how Perigon operates that could enhance trust with a senior audience?
-
-SECTION 5: The Conversation We Keep Having
-- What recurring questions do clients ask that we consistently answer in the same manner?
-- Are there any misconceptions we regularly address?
-- Is there a concern our ICP should prioritise that they are currently overlooking?
-- Are there any issues they are overemphasising that we need to reframe?
-
-Additionally, are there any upcoming events, deadlines, or opportunities that we should connect content to?
-
-INSTRUCTIONS:
-- Do not fully respond to every question.
-- Aim to choose two or three comprehensive answers across the sections to produce strong, focused ideas for Emma's LinkedIn posts.
-- Sections that typically yield the best content are Section 3 (Team Brain) and Section 5 (The Conversation We Keep Having) — these sections contain the most distinct and human insights.</div>
-        <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>If the Step 3 output is thin or too general, the meeting itself likely contained limited strategic discussion. This cannot be improved by changing the prompt — it reflects the quality of the source material.</p></div>
-      </div>
-    </div>
-
-    <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">4</div><div><div class="zap-title">Analyze and Return Data &nbsp;/&nbsp; Generate 3 posts for Emma</div><div class="zap-app">Action &nbsp;&#183;&nbsp; AI by Zapier &nbsp;&#183;&nbsp; GPT-5.2 &nbsp;&#183;&nbsp; Prompt builder: Custom prompt</div></div></div>
-      <div class="zap-body">
-        <p>The second AI step — the post generator. Takes the structured Step 3 analysis as its primary input and generates three complete LinkedIn posts in Emma's voice, one per post type. Uses five knowledge base files to anchor every post to Emma's style, her ICP's pain points, and Perigon's positioning. Output is formatted in HTML, ready for the email step. The Zapier Prompt Builder rates this prompt as <strong>Excellent</strong>.</p>
-        <div class="zap-config">
-          <div class="zap-row"><span>Provider</span><span>OpenAI</span></div>
-          <div class="zap-row"><span>Model</span><span>GPT-5.2</span></div>
           <div class="zap-row"><span>Build mode</span><span>Custom prompt</span></div>
-          <div class="zap-row"><span>Input</span><span>Step 3 output (refocused meeting analysis)</span></div>
-          <div class="zap-row"><span>Knowledge source 1</span><span>Perigon Partners – Knowledge Source (for AI by Zapier)</span></div>
-          <div class="zap-row"><span>Knowledge source 2</span><span>ICP 20 Pain Points for LinkedIn</span></div>
-          <div class="zap-row"><span>Knowledge source 3</span><span>2025 LinkedIn Presence Review</span></div>
-          <div class="zap-row"><span>Knowledge source 4</span><span>Emma Walford LinkedIn Voice &amp; Persona Guide</span></div>
-          <div class="zap-row"><span>Knowledge source 5</span><span>ESG Compliance Table (Up To Date)</span></div>
-          <div class="zap-row"><span>Output format</span><span>HTML (rendered in email body)</span></div>
+          <div class="zap-row"><span>Input</span><span>Text content from Step 3 (raw transcript)</span></div>
+          <div class="zap-row"><span>Zapier variable</span><span><code>&#123;&#123;=gives['351370535']["text_content"]&#125;&#125;</code></span></div>
+          <div class="zap-row"><span>Knowledge base 1</span><span>Voice DNA: Emma, Perigon Partners.txt</span></div>
+          <div class="zap-row"><span>Knowledge base 2</span><span>Perigon Partners Knowledge Base</span></div>
+          <div class="zap-row"><span>Output format</span><span>Plain text</span></div>
         </div>
-        <div class="zap-prompt"><div class="zap-prompt-label">Prompt (verbatim)</div>You are a LinkedIn ghostwriter for Emma Walford, Founder of Perigon Partners. Your entire job is to produce Linkedin posts that sound exactly like Emma - not like a LinkedIn ghostwriter, not like a consultant, not like an AI.
+        <div class="zap-prompt"><div class="zap-prompt-label">Prompt (verbatim)</div>You are writing LinkedIn posts as Emma Walford, CEO at Perigon Partners. Every post must sound like Emma wrote it herself. Not like a brand, not like a copywriter, and not like AI.
 
-Do not write any post copy without looking through the 'Emma Walford LinkedIn Voice &amp; Persona Guide (LinkedIn Ghostwriting instructions)' first.
+IMPORTANT: read the document titled 'Voice DNA Emma, Perigon Partners.txt' before writing these posts.
 
-Do not produce any generic content - the copy of these posts must be something Emma would write.
+INSTRUCTIONS: write as many linkedin posts as seem suitable from this transcript: {{=gives['351370535']["text_content"]}}. This is where Emma is recorded talking about her work challenges, thoughts and wins.
 
-Give me the copy for 3 linkedin posts for Emma to post this week.
+Use the posts type formats below to help write the posts. They should all build both reach and relationship with Emma's ideal client audience.
 
-One of each of the following three types:
-1. top of the funnel thought leadership/expertise posts, offering advice to our ideal client persona. examples of this could be 'I went to this event and here's my takeaway, points 1, 2 &amp; 3' or 'new regulations have been introduced, here's how it affects....' or 'how to navigate...'
-2. Trust building posts, where Emma shares how she handled certain situations with clients, within the business, etc. Maybe more personal posts too.
-3. Stronger CTA posts. These might be 'try our new ESG compliance tool' or 'let me know how Perigon Partners can help you in this situation'. These CTA's will develop as we build more interactive tools and refine our services.
+Post Type 1
+Thought Leadership
+Goal: Reach and awareness. Position Emma as the most relevant expert voice for her ICP. The reader should finish thinking "she understands my world."
 
-Our Ideal Client persona is this, 'CEO or C-Suite of a financial, infrastructure or service business with 100-2,000 employees / 7-8 figure revenue' and Emma is actively building these people in her linkedin contacts.
+Post Type 2
+Trust Building
+Goal: Deepen relationship with the existing audience. Make followers feel they know Emma. The reader should finish thinking "I feel like I know her."
 
-The posts should centre around the discussion here:
-{{=gives['349040746']["output"]}}
+Post Type 3
+CTA
+Goal: Move warm audience members toward a next step with Perigon — a tool, diagnostic, conversation, or service. The reader should finish thinking "that's actually useful — I might take her up on that."
 
-IMPORTANT - give the output in HTML formatting
+RULES
+Aim for 150 to 200 words per post.
+IMPORTANT: all output should be in plain text
+DO NOT use em dashes (—). Ever. Use full stops, commas, ellipses, or restructure the sentence.
+One exclamation mark per post maximum. Earn it.
+Use contractions. "Don't," "isn't," "you'll." They keep things human.
+Write in British English (realise, organisation, centre, etc.).
+Do NOT sound like
+Corporate drone: "We leverage synergies to drive stakeholder value."
+Trying-too-hard casual: "Hey guys!! So like, here's the thing..."
+Detached expert: "Research indicates that operational efficiency..."
+Salesy: "This INCREDIBLE opportunity will TRANSFORM your business!"
 
-FINAL CHECK BEFORE OUTPUTTING:
-Read each post idea back against Emma's top-performing posts in the knowledge base. Ask: would Emma actually post this? If the honest answer is no — rewrite it until the answer is yes.</div>
-        <div class="callout warning" style="margin-top:12px;"><div class="callout-icon">&#9888;&#65039;</div><p>The variable <code>&#123;&#123;=gives['349040746']["output"]&#125;&#125;</code> is the Zapier reference to the Step 3 output. If this Zap is ever rebuilt from scratch, this reference ID will need to be updated to match the new Step 3 output field. The number <code>349040746</code> is the internal Zapier step ID for Step 3.</p></div>
+Quality check before outputting
+Does it sound like one person talking to one person?
+Is the reader centred in the first few lines?
+Is there a point of view (not just information)?
+Are sentences varied? Flowing connectors plus strategic short punches?
+Does it end with momentum?
+Could you cut 20% and lose nothing? If yes, cut it.
+Are there any em dashes? Remove them.</div>
+
+        <div class="callout warning" style="margin-top:12px;"><div class="callout-icon">&#9888;&#65039;</div><p>The variable <code>&#123;&#123;=gives['351370535']["text_content"]&#125;&#125;</code> is the Zapier reference to the Step 3 text output. The number <code>351370535</code> is the internal Zapier step ID. If this Zap is ever rebuilt from scratch, this ID will need to be updated to match the new Step 3 step ID.</p></div>
       </div>
     </div>
 
     <div class="zap-step">
-      <div class="zap-header"><div class="zap-num">5</div><div><div class="zap-title">Send Email</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Microsoft Outlook &nbsp;&#183;&nbsp; Send Email</div></div></div>
+      <div class="zap-header"><div class="zap-num">5</div><div><div class="zap-title">Sends Email to Emma</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Microsoft Outlook &nbsp;&#183;&nbsp; Send Email</div></div></div>
       <div class="zap-body">
-        <p>Sends the HTML-formatted posts directly to Emma's inbox. No attachments. The email body contains the three complete posts from Step 4, rendered in HTML. Sent from the agents@ shared mailbox so Emma can reply or forward easily.</p>
+        <p>Sends the plain-text posts directly to Emma's inbox from the agents@ shared mailbox. The email body contains the three complete posts from Step 4. No attachments. This step fires immediately after Step 4 completes, before the clean-up steps run.</p>
         <div class="zap-config">
-          <div class="zap-row"><span>Send from (Shared Mailbox)</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="432224262d3730033326312a242c2d332231372d2631306d202c6d3628">[email&#160;protected]</a></span></div>
-          <div class="zap-row"><span>To</span><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e0858d8d81a090859289878f8e908192948e859293ce838fce958b">[email&#160;protected]</a></span></div>
-          <div class="zap-row"><span>CC</span><span>—</span></div>
-          <div class="zap-row"><span>BCC</span><span>—</span></div>
-          <div class="zap-row"><span>Body type</span><span>HTML</span></div>
-          <div class="zap-row"><span>Body content</span><span>HTML output from Step 4</span></div>
+          <div class="zap-row"><span>Send from</span><span>agents@perigonpartners.co.uk (shared mailbox)</span></div>
+          <div class="zap-row"><span>To</span><span>emma@perigonpartners.co.uk</span></div>
+          <div class="zap-row"><span>Body type</span><span>Plain text</span></div>
+          <div class="zap-row"><span>Body content</span><span>Output from Step 4</span></div>
           <div class="zap-row"><span>Attachments</span><span>None</span></div>
         </div>
       </div>
     </div>
 
+    <div class="zap-step">
+      <div class="zap-header"><div class="zap-num">6</div><div><div class="zap-title">Find the Google Doc</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Google Drive &nbsp;&#183;&nbsp; Find a File</div></div></div>
+      <div class="zap-body">
+        <p>Locates the temporary Google Doc that was created in Step 2, using the file ID passed through the earlier steps. This step exists purely to prepare for deletion in Step 7 — it doesn't do anything else.</p>
+        <div class="zap-config">
+          <div class="zap-row"><span>Action event</span><span>Find a File</span></div>
+          <div class="zap-row"><span>File reference</span><span>Google Doc ID from Step 2</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zap-step">
+      <div class="zap-header"><div class="zap-num">7</div><div><div class="zap-title">Delete the Google Doc</div><div class="zap-app">Action &nbsp;&#183;&nbsp; Google Drive &nbsp;&#183;&nbsp; Delete File</div></div></div>
+      <div class="zap-body">
+        <p>Permanently deletes the temporary Google Doc identified in Step 6. This runs after the email has already been sent in Step 5, so deletion has no effect on the output. The Google Doc was a working file only — the source transcript remains safely in SharePoint, and the posts are in Emma's inbox.</p>
+        <p>This step exists for two reasons: to keep Google Drive clean and uncluttered over time, and to ensure that transcript content doesn't accumulate in a third-party system unnecessarily. Emma's SharePoint folder remains the single source of record for all transcripts.</p>
+        <div class="zap-config">
+          <div class="zap-row"><span>Action event</span><span>Delete File</span></div>
+          <div class="zap-row"><span>File</span><span>Google Doc identified in Step 6</span></div>
+          <div class="zap-row"><span>Effect on output</span><span>None — email already sent in Step 5</span></div>
+        </div>
+        <div class="callout tip" style="margin-top:12px;"><div class="callout-icon">&#128161;</div><p>The original .docx transcript in SharePoint is <strong>not</strong> deleted. Only the temporary Google Doc copy is removed. Emma's recordings are always preserved in SharePoint.</p></div>
+      </div>
+    </div>
+
     <h3>Knowledge base files — what each one does</h3>
     <table style="margin-top:12px;">
-      <thead><tr><th style="width:44%;">File</th><th>Purpose in the automation</th></tr></thead>
+      <thead><tr><th style="width:40%;">File</th><th>Purpose in the automation</th></tr></thead>
       <tbody>
-        <tr style="background:var(--bg);"><td style="font-weight:600;">Perigon Partners – Knowledge Source (for AI by Zapier)</td><td>Used by both Step 3 and Step 4. Gives the AI context about Perigon's team, services, mission, and clients. Ensures posts refer to the firm accurately. <strong>Update this file whenever the team, services, or positioning changes.</strong></td></tr>
+        <tr style="background:var(--bg);"><td style="font-weight:600;">Voice DNA: Emma, Perigon Partners.txt</td><td>The primary style guide for the AI. Contains Emma's core identity, worldview, writing voice, what she never does, the Cringe List, and calibration quotes. This is what stops the output sounding like generic LinkedIn content. <strong>Update this file if Emma's positioning or voice evolves significantly.</strong></td></tr>
+        <tr><td style="font-weight:600;">Perigon Partners Knowledge Base</td><td>Gives the AI accurate context about Perigon's services, team, clients, and mission. Prevents the AI from making up or misrepresenting what Perigon does. <strong>Update this file whenever services, team composition, or key positioning changes.</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout info" style="margin-top:20px;"><div class="callout-icon">&#8505;&#65039;</div><p>Both knowledge base files are uploaded directly into the Step 4 AI by Zapier configuration. They are not linked dynamically — if a file is updated, Sally needs to re-upload the new version into the Zap and save the step for the change to take effect.</p></div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Perigon Partners &nbsp;&middot;&nbsp; LinkedIn Post Generator SOP &nbsp;&middot;&nbsp; Version 2.0 &nbsp;&middot;&nbsp; February 2026</p>
+  <p style="margin-top:6px;">System owner: Sally Weatherly, Growth &amp; Operations Lead &nbsp;&middot;&nbsp; Confidential</p>
+</footer>
+
+</body>
+</html>
